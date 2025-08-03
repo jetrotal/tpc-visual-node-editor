@@ -1,0 +1,102 @@
+[
+    {
+        "command": "@ev.flash",
+        "template": "@ev.flash [.player | .boat | .ship | .airship | .self | [Array]] .rgbv(Numeric|Variable, Numeric|Variable, Numeric|Variable, Numeric|Variable) .time(Numeric) [.wait]",
+        "base": "@ev.flash",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".player"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".boat"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".ship"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".airship"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".self"
+                    },
+                    {
+                        "type": "Array"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".rgbv",
+                "arguments": [
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".time",
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            },
+            {
+                "type": "keyword",
+                "value": ".wait",
+                "optional": true
+            }
+        ]
+    }
+]

@@ -1,0 +1,46 @@
+[
+    {
+        "command": "@map.getTerrain",
+        "template": "@map.getTerrain .pos(Numeric | Variable, Numeric | Variable) .dst(Variable)",
+        "base": "@map.getTerrain",
+        "arguments": [
+            {
+                "type": "subcommand",
+                "name": ".pos",
+                "arguments": [
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".dst",
+                "arguments": [
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            }
+        ]
+    }
+]

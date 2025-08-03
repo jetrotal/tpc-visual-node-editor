@@ -1,0 +1,380 @@
+[
+    {
+        "command": "@pic.move",
+        "template": "@pic[Numeric | Variable].move {\n        .time(Numeric | Variable)\n        [.wait]\n        [.relative]\n        [.pos(Numeric | Variable, Numeric | Variable)] [.center | .topLeft | .bottomLeft | .topRight | .bottomRight | .top | .bottom | .left | .right]\n        [.scale(Numeric | Variable) | .scale2(Numeric, Numeric)]\n        [.trans(Numeric | Variable) | .transparency(Numeric | Variable)]\n        [.rgbs(Numeric | Variable, Numeric | Variable, Numeric | Variable, Numeric | Variable)]\n        [.rotate(Numeric) | .wave(Numeric) | .angle(Numeric | Variable, Numeric | Variable)]\n        [.multi | .add | .overlay]\n        [.hrev | .hreverse | .vrev | .vreverse | .hvrev | .hvreverse]\n        [.keepRgbs] [.keepEffect] [.keepBlend] [.keepFlip] [.keepTime]\n    }",
+        "base": "@pic",
+        "subcommand": ".move",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "block",
+                "content": [
+                    {
+                        "type": "subcommand",
+                        "name": ".time",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".wait",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".relative",
+                        "optional": true
+                    },
+                    {
+                        "type": "group",
+                        "optional": true,
+                        "content": [
+                            {
+                                "type": "subcommand",
+                                "name": ".pos",
+                                "arguments": [
+                                    {
+                                        "type": "choice",
+                                        "options": [
+                                            {
+                                                "type": "Numeric"
+                                            },
+                                            {
+                                                "type": "Variable"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "choice",
+                                        "options": [
+                                            {
+                                                "type": "Numeric"
+                                            },
+                                            {
+                                                "type": "Variable"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "choice",
+                                "optional": true,
+                                "options": [
+                                    {
+                                        "type": "keyword",
+                                        "value": ".center"
+                                    },
+                                    {
+                                        "type": "keyword",
+                                        "value": ".topLeft"
+                                    },
+                                    {
+                                        "type": "keyword",
+                                        "value": ".bottomLeft"
+                                    },
+                                    {
+                                        "type": "keyword",
+                                        "value": ".topRight"
+                                    },
+                                    {
+                                        "type": "keyword",
+                                        "value": ".bottomRight"
+                                    },
+                                    {
+                                        "type": "keyword",
+                                        "value": ".top"
+                                    },
+                                    {
+                                        "type": "keyword",
+                                        "value": ".bottom"
+                                    },
+                                    {
+                                        "type": "keyword",
+                                        "value": ".left"
+                                    },
+                                    {
+                                        "type": "keyword",
+                                        "value": ".right"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "optional": true,
+                        "options": [
+                            {
+                                "type": "subcommand",
+                                "name": ".scale",
+                                "arguments": [
+                                    {
+                                        "type": "choice",
+                                        "options": [
+                                            {
+                                                "type": "Numeric"
+                                            },
+                                            {
+                                                "type": "Variable"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "subcommand",
+                                "name": ".scale2",
+                                "arguments": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Numeric"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "optional": true,
+                        "options": [
+                            {
+                                "type": "subcommand",
+                                "name": ".trans",
+                                "arguments": [
+                                    {
+                                        "type": "choice",
+                                        "options": [
+                                            {
+                                                "type": "Numeric"
+                                            },
+                                            {
+                                                "type": "Variable"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "subcommand",
+                                "name": ".transparency",
+                                "arguments": [
+                                    {
+                                        "type": "choice",
+                                        "options": [
+                                            {
+                                                "type": "Numeric"
+                                            },
+                                            {
+                                                "type": "Variable"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".rgbs",
+                        "optional": true,
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "optional": true,
+                        "options": [
+                            {
+                                "type": "subcommand",
+                                "name": ".rotate",
+                                "arguments": [
+                                    {
+                                        "type": "Numeric"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "subcommand",
+                                "name": ".wave",
+                                "arguments": [
+                                    {
+                                        "type": "Numeric"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "subcommand",
+                                "name": ".angle",
+                                "arguments": [
+                                    {
+                                        "type": "choice",
+                                        "options": [
+                                            {
+                                                "type": "Numeric"
+                                            },
+                                            {
+                                                "type": "Variable"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "choice",
+                                        "options": [
+                                            {
+                                                "type": "Numeric"
+                                            },
+                                            {
+                                                "type": "Variable"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "optional": true,
+                        "options": [
+                            {
+                                "type": "keyword",
+                                "value": ".multi"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".add"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".overlay"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "optional": true,
+                        "options": [
+                            {
+                                "type": "keyword",
+                                "value": ".hrev"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".hreverse"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".vrev"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".vreverse"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".hvrev"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".hvreverse"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".keepRgbs",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".keepEffect",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".keepBlend",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".keepFlip",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".keepTime",
+                        "optional": true
+                    }
+                ]
+            }
+        ]
+    }
+]

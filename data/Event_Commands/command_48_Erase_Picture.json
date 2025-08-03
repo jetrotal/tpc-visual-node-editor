@@ -1,0 +1,34 @@
+[
+    {
+        "command": "@pic.erase",
+        "template": "@pic[Numeric | Variable | Numeric..Numeric].erase",
+        "base": "@pic",
+        "subcommand": ".erase",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                },
+                {
+                    "type": "Numeric..Numeric"
+                }
+            ]
+        },
+        "arguments": []
+    },
+    {
+        "command": "@pic.erase",
+        "template": "@pic.erase .all",
+        "base": "@pic.erase",
+        "arguments": [
+            {
+                "type": "keyword",
+                "value": ".all"
+            }
+        ]
+    }
+]

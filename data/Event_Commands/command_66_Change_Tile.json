@@ -1,0 +1,29 @@
+[
+    {
+        "command": "@map.replaceTile",
+        "template": "@map.replaceTile [.lower | .upper] [Numeric] (Numeric)",
+        "base": "@map.replaceTile",
+        "array_parameter": {
+            "type": "Numeric"
+        },
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".lower"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".upper"
+                    }
+                ]
+            },
+            {
+                "type": "Numeric"
+            }
+        ]
+    }
+]

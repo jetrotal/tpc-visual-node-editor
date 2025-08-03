@@ -1,0 +1,106 @@
+[
+    {
+        "command": "@msg.face",
+        "template": "@msg.face (String), (Numeric | Variable | Numeric..Numeric)\n        [, .left | .right]\n        [, .hrev | .hreverse]\n        [, .force]\n        [.interval(Numeric, Numeric, Numeric)]\n        [.fpc(Numeric, Numeric, Numeric)]\n        [.once]\n        [.loopback(Numeric)]",
+        "base": "@msg.face",
+        "arguments": [
+            {
+                "type": "String"
+            },
+            {
+                "type": "choice",
+                "options": [
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Variable"
+                    },
+                    {
+                        "type": "Numeric..Numeric"
+                    }
+                ]
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".left"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".right"
+                    }
+                ]
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".hrev"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".hreverse"
+                    }
+                ]
+            },
+            {
+                "type": "keyword",
+                "value": ".force",
+                "optional": true
+            },
+            {
+                "type": "subcommand",
+                "name": ".interval",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".fpc",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            },
+            {
+                "type": "keyword",
+                "value": ".once",
+                "optional": true
+            },
+            {
+                "type": "subcommand",
+                "name": ".loopback",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            }
+        ]
+    }
+]

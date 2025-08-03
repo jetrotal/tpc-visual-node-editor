@@ -1,0 +1,132 @@
+[
+    {
+        "command": "@anim.show",
+        "template": "@anim[Numeric | Variable].show {\n        [.target(Numeric | Variable) | .player | .boat | .ship | .airship | .self | .picTarget(Numeric) | .pos(Numeric, Numeric) | .bind(Variable, Variable)]\n        [.buffer(Numeric)]\n        [.reverse(Numeric)]\n        [.wait]\n        [.tiled]\n    }",
+        "base": "@anim",
+        "subcommand": ".show",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "block",
+                "content": [
+                    {
+                        "type": "choice",
+                        "optional": true,
+                        "options": [
+                            {
+                                "type": "subcommand",
+                                "name": ".target",
+                                "arguments": [
+                                    {
+                                        "type": "choice",
+                                        "options": [
+                                            {
+                                                "type": "Numeric"
+                                            },
+                                            {
+                                                "type": "Variable"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".player"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".boat"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".ship"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".airship"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".self"
+                            },
+                            {
+                                "type": "subcommand",
+                                "name": ".picTarget",
+                                "arguments": [
+                                    {
+                                        "type": "Numeric"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "subcommand",
+                                "name": ".pos",
+                                "arguments": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Numeric"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "subcommand",
+                                "name": ".bind",
+                                "arguments": [
+                                    {
+                                        "type": "Variable"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".buffer",
+                        "optional": true,
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".reverse",
+                        "optional": true,
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".wait",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".tiled",
+                        "optional": true
+                    }
+                ]
+            }
+        ]
+    }
+]

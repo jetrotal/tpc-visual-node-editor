@@ -1,0 +1,76 @@
+[
+    {
+        "command": "@btl.hook",
+        "template": "@btl.hook [.atb | .damagePop | .targeting | .addState | .paramBuff] [.none | .cev(Numeric | Variable) .var(Variable)]",
+        "base": "@btl.hook",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".atb"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".damagePop"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".targeting"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".addState"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".paramBuff"
+                    }
+                ]
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".none"
+                    },
+                    {
+                        "type": "group",
+                        "content": [
+                            {
+                                "type": "subcommand",
+                                "name": ".cev",
+                                "arguments": [
+                                    {
+                                        "type": "choice",
+                                        "options": [
+                                            {
+                                                "type": "Numeric"
+                                            },
+                                            {
+                                                "type": "Variable"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "subcommand",
+                                "name": ".var",
+                                "arguments": [
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

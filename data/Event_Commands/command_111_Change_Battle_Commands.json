@@ -1,0 +1,65 @@
+[
+    {
+        "command": "@actor.cmd",
+        "template": "@actor[Numeric | Variable].cmd [.add(Numeric | Variable) | .sub(Numeric | Variable | .all)]",
+        "base": "@actor",
+        "subcommand": ".cmd",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "subcommand",
+                        "name": ".add",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".sub",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    },
+                                    {
+                                        "type": "keyword",
+                                        "value": ".all"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

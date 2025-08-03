@@ -1,0 +1,25 @@
+[
+    {
+        "command": "@scr.show",
+        "template": "@scr.show [.default | (Numeric | Variable)]",
+        "base": "@scr.show",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".default"
+                    },
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            }
+        ]
+    }
+]

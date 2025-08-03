@@ -1,0 +1,23 @@
+[
+    {
+        "command": "@msg.show",
+        "template": "@msg.show (String)...",
+        "base": "@msg.show",
+        "arguments": [
+            {
+                "type": "String",
+                "repeatable": true
+            }
+        ]
+    },
+    {
+        "command": "(String)",
+        "template": "(String)",
+        "base": null,
+        "arguments": [
+            {
+                "type": "String"
+            }
+        ]
+    }
+]

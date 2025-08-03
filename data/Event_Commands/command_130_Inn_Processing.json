@@ -1,0 +1,54 @@
+[
+    {
+        "command": "@inn",
+        "template": "@inn {\n        .msg (Numeric)\n        .cost (Numeric)\n        [.stay { (Event Commands) }]\n        [.leave { (Event Commands) }]\n    }",
+        "base": "@inn",
+        "arguments": [
+            {
+                "type": "block",
+                "content": [
+                    {
+                        "type": "subcommand",
+                        "name": ".msg",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".cost",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".stay",
+                        "optional": true,
+                        "arguments": [
+                            {
+                                "type": "block",
+                                "content": "Event Commands"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".leave",
+                        "optional": true,
+                        "arguments": [
+                            {
+                                "type": "block",
+                                "content": "Event Commands"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

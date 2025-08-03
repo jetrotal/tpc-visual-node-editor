@@ -1,0 +1,93 @@
+[
+    {
+        "command": "@map.setVehiclePos",
+        "template": "@map[Numeric | Variable].setVehiclePos [.boat | .ship | .airship] .pos(Numeric | Variable, Numeric | Variable) [.retain | .up | .right | .down | .left]",
+        "base": "@map",
+        "subcommand": ".setVehiclePos",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".boat"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".ship"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".airship"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".pos",
+                "arguments": [
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".retain"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".up"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".right"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".down"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".left"
+                    }
+                ]
+            }
+        ]
+    }
+]

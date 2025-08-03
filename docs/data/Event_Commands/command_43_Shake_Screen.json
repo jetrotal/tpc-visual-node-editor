@@ -1,0 +1,56 @@
+[
+    {
+        "command": "@scr.shake",
+        "template": "@scr.shake [.once(Numeric) | .begin] .value(Numeric, Numeric) [.wait]",
+        "base": "@scr.shake",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "subcommand",
+                        "name": ".once",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".begin"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".value",
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            },
+            {
+                "type": "keyword",
+                "value": ".wait",
+                "optional": true
+            }
+        ]
+    },
+    {
+        "command": "@scr.shake",
+        "template": "@scr.shake .end",
+        "base": "@scr.shake",
+        "arguments": [
+            {
+                "type": "keyword",
+                "value": ".end"
+            }
+        ]
+    }
+]

@@ -1,0 +1,75 @@
+[
+    {
+        "command": "@msg.hook",
+        "template": "@msg.hook {\n        [.e] [.showing] [.closing] [.blit]\n        .cev (Numeric | Variable)\n        .sys (Variable, String)\n        .user (Variable, String)\n    }",
+        "base": "@msg.hook",
+        "arguments": [
+            {
+                "type": "block",
+                "content": [
+                    {
+                        "type": "keyword",
+                        "value": ".e",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".showing",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".closing",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".blit",
+                        "optional": true
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".cev",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".sys",
+                        "arguments": [
+                            {
+                                "type": "Variable"
+                            },
+                            {
+                                "type": "String"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".user",
+                        "arguments": [
+                            {
+                                "type": "Variable"
+                            },
+                            {
+                                "type": "String"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

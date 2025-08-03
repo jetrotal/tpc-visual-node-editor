@@ -1,0 +1,8 @@
+[
+    {
+        "command": "@bgm.restore",
+        "template": "@bgm.restore",
+        "base": "@bgm.restore",
+        "arguments": []
+    }
+]

@@ -1,0 +1,20 @@
+[
+    {
+        "command": "@enemy.appear",
+        "template": "@enemy[Numeric | Variable].appear",
+        "base": "@enemy",
+        "subcommand": ".appear",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": []
+    }
+]

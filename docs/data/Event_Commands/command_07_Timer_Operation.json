@@ -1,0 +1,64 @@
+[
+    {
+        "command": "@timer",
+        "template": "@timer [.timer1 | .timer2] [.set(Numeric | Variable) | .start | .stop] [.show] [.continueInBattle]",
+        "base": "@timer",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".timer1"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".timer2"
+                    }
+                ]
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "subcommand",
+                        "name": ".set",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".start"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".stop"
+                    }
+                ]
+            },
+            {
+                "type": "keyword",
+                "value": ".show",
+                "optional": true
+            },
+            {
+                "type": "keyword",
+                "value": ".continueInBattle",
+                "optional": true
+            }
+        ]
+    }
+]

@@ -1,0 +1,71 @@
+[
+    {
+        "command": "@enemy.hp",
+        "template": "@enemy[Numeric | Variable].hp [.add(Numeric | Variable) | .sub(Numeric | Variable)] [.percent] [.possibleDie]",
+        "base": "@enemy",
+        "subcommand": ".hp",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "subcommand",
+                        "name": ".add",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".sub",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "keyword",
+                "value": ".percent",
+                "optional": true
+            },
+            {
+                "type": "keyword",
+                "value": ".possibleDie",
+                "optional": true
+            }
+        ]
+    }
+]

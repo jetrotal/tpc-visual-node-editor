@@ -1,0 +1,8 @@
+[
+    {
+        "command": "@ev.stopAction",
+        "template": "@ev.stopAction",
+        "base": "@ev.stopAction",
+        "arguments": []
+    }
+]

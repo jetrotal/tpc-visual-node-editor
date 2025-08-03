@@ -1,0 +1,26 @@
+[
+    {
+        "command": "@player.trans",
+        "template": "@player.trans [.on | .off | (Numeric)]",
+        "base": "@player.trans",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".on"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".off"
+                    },
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            }
+        ]
+    }
+]

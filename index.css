@@ -1,0 +1,48 @@
+:root {
+  --bg-color: #1a1d21;
+  --bg-color-light: #2c3035;
+  --bg-color-lighter: #3a3f44;
+  --text-color: #e0e0e0;
+  --primary-color: #4a90e2;
+  --border-color: #444;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'Roboto Mono', monospace;
+  --shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow: hidden;
+}
+#root {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+}
+* {
+  box-sizing: border-box;
+}
+
+.react-flow__controls-button {
+  background: var(--bg-color-lighter) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  color: var(--text-color) !important;
+}
+
+.react-flow__controls-button:hover {
+  background: var(--bg-color-light) !important;
+}
+
+.react-flow__controls .react-flow__controls-button:last-of-type {
+  border-bottom: none !important;
+}
+
+.react-flow__controls-button svg {
+  fill: currentColor !important;
+}
+
+.react-flow__panel.react-flow__attribution {
+  display: none;
+}

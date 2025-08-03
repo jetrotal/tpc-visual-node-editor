@@ -1,0 +1,20 @@
+[
+    {
+        "command": "@map.tileset",
+        "template": "@map.tileset (Numeric | Variable)",
+        "base": "@map.tileset",
+        "arguments": [
+            {
+                "type": "choice",
+                "options": [
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            }
+        ]
+    }
+]

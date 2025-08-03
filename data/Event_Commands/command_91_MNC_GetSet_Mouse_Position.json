@@ -1,0 +1,39 @@
+[
+    {
+        "command": "@mouse",
+        "template": "@mouse [.getPos(Variable, Variable) | .setPos(Variable, Variable)]",
+        "base": "@mouse",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "subcommand",
+                        "name": ".getPos",
+                        "arguments": [
+                            {
+                                "type": "Variable"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".setPos",
+                        "arguments": [
+                            {
+                                "type": "Variable"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

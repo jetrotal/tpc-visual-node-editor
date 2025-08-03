@@ -1,0 +1,157 @@
+[
+    {
+        "command": "@btl.begin",
+        "template": "@btl.begin {\n        .troop (Numeric | Variable)\n        [.normal | .back_actor | .back_enemy | .side_actor | .side_enemy]\n        [.backdropFile(String) [.shallow | .deep] | .backdropId(Numeric)]\n        [.disableEscape | .enableEscape]\n        [.enableGameover]\n        [.preempt]\n        [.disableFlash]\n        [.win { (Event Commands) }]\n        [.lose { (Event Commands) }]\n        [.escape { (Event Commands) }]\n    }",
+        "base": "@btl.begin",
+        "arguments": [
+            {
+                "type": "block",
+                "content": [
+                    {
+                        "type": "subcommand",
+                        "name": ".troop",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "optional": true,
+                        "options": [
+                            {
+                                "type": "keyword",
+                                "value": ".normal"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".back_actor"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".back_enemy"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".side_actor"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".side_enemy"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "optional": true,
+                        "options": [
+                            {
+                                "type": "subcommand",
+                                "name": ".backdropFile",
+                                "arguments": [
+                                    {
+                                        "type": "String"
+                                    },
+                                    {
+                                        "type": "choice",
+                                        "optional": true,
+                                        "options": [
+                                            {
+                                                "type": "keyword",
+                                                "value": ".shallow"
+                                            },
+                                            {
+                                                "type": "keyword",
+                                                "value": ".deep"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "subcommand",
+                                "name": ".backdropId",
+                                "arguments": [
+                                    {
+                                        "type": "Numeric"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "optional": true,
+                        "options": [
+                            {
+                                "type": "keyword",
+                                "value": ".disableEscape"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".enableEscape"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".enableGameover",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".preempt",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".disableFlash",
+                        "optional": true
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".win",
+                        "optional": true,
+                        "arguments": [
+                            {
+                                "type": "block",
+                                "content": "Event Commands"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".lose",
+                        "optional": true,
+                        "arguments": [
+                            {
+                                "type": "block",
+                                "content": "Event Commands"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".escape",
+                        "optional": true,
+                        "arguments": [
+                            {
+                                "type": "block",
+                                "content": "Event Commands"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,34 @@
+[
+    {
+        "command": "@label.set",
+        "template": "@label.set (Numeric | String)",
+        "base": "@label.set",
+        "arguments": [
+            {
+                "type": "choice",
+                "options": [
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "String"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "command": "(String):",
+        "template": "(String):",
+        "base": null,
+        "arguments": [
+            {
+                "type": "String"
+            },
+            {
+                "type": "keyword",
+                "value": ":"
+            }
+        ]
+    }
+]

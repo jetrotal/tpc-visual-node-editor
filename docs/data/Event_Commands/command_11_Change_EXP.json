@@ -1,0 +1,122 @@
+[
+    {
+        "command": "@actor.exp",
+        "template": "@actor[Numeric | Variable].exp [.add(Numeric | Variable) | .sub(Numeric | Variable)] [.notify]",
+        "base": "@actor",
+        "subcommand": ".exp",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "subcommand",
+                        "name": ".add",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".sub",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "keyword",
+                "value": ".notify",
+                "optional": true
+            }
+        ]
+    },
+    {
+        "command": "@actor.exp",
+        "template": "@actor.exp .all [.add(Numeric | Variable) | .sub(Numeric | Variable)] [.notify]",
+        "base": "@actor.exp",
+        "arguments": [
+            {
+                "type": "keyword",
+                "value": ".all"
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "subcommand",
+                        "name": ".add",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".sub",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "keyword",
+                "value": ".notify",
+                "optional": true
+            }
+        ]
+    }
+]

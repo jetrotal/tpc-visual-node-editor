@@ -1,0 +1,22 @@
+[
+    {
+        "command": "@scr.hide",
+        "template": "@scr.hide [.default | (Numeric)]",
+        "base": "@scr.hide",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".default"
+                    },
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            }
+        ]
+    }
+]

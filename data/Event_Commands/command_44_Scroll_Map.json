@@ -1,0 +1,168 @@
+[
+    {
+        "command": "@scr.scroll",
+        "template": "@scr.scroll [\n        .fix |\n        .unfix |\n        .restore .speed(Numeric) [.wait] |\n        .shift(Numeric) [.up | .right | .down | .left] .speed(Numeric) [.wait] |\n        .pxShift(Numeric, Numeric) .time(Numeric) [.wait] |\n        .set(Numeric, Numeric) .time(Numeric) [.center] [.relative] [.wait]\n    ]",
+        "base": "@scr.scroll",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".fix"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".unfix"
+                    },
+                    {
+                        "type": "group",
+                        "content": [
+                            {
+                                "type": "keyword",
+                                "value": ".restore"
+                            },
+                            {
+                                "type": "subcommand",
+                                "name": ".speed",
+                                "arguments": [
+                                    {
+                                        "type": "Numeric"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".wait",
+                                "optional": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "group",
+                        "content": [
+                            {
+                                "type": "subcommand",
+                                "name": ".shift",
+                                "arguments": [
+                                    {
+                                        "type": "Numeric"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "choice",
+                                "optional": true,
+                                "options": [
+                                    {
+                                        "type": "keyword",
+                                        "value": ".up"
+                                    },
+                                    {
+                                        "type": "keyword",
+                                        "value": ".right"
+                                    },
+                                    {
+                                        "type": "keyword",
+                                        "value": ".down"
+                                    },
+                                    {
+                                        "type": "keyword",
+                                        "value": ".left"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "subcommand",
+                                "name": ".speed",
+                                "arguments": [
+                                    {
+                                        "type": "Numeric"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".wait",
+                                "optional": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "group",
+                        "content": [
+                            {
+                                "type": "subcommand",
+                                "name": ".pxShift",
+                                "arguments": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Numeric"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "subcommand",
+                                "name": ".time",
+                                "arguments": [
+                                    {
+                                        "type": "Numeric"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".wait",
+                                "optional": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "group",
+                        "content": [
+                            {
+                                "type": "subcommand",
+                                "name": ".set",
+                                "arguments": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Numeric"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "subcommand",
+                                "name": ".time",
+                                "arguments": [
+                                    {
+                                        "type": "Numeric"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".center",
+                                "optional": true
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".relative",
+                                "optional": true
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".wait",
+                                "optional": true
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

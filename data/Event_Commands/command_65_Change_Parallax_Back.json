@@ -1,0 +1,42 @@
+[
+    {
+        "command": "@map.parallax",
+        "template": "@map.parallax (String) [.hloop] [.vloop] [.hscroll(Numeric)] [.vscroll(Numeric)]",
+        "base": "@map.parallax",
+        "arguments": [
+            {
+                "type": "String"
+            },
+            {
+                "type": "keyword",
+                "value": ".hloop",
+                "optional": true
+            },
+            {
+                "type": "keyword",
+                "value": ".vloop",
+                "optional": true
+            },
+            {
+                "type": "subcommand",
+                "name": ".hscroll",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".vscroll",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            }
+        ]
+    }
+]

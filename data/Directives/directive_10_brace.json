@@ -1,0 +1,51 @@
+[
+    {
+        "command": "#brace",
+        "template": "#brace .does.not.represent.the.start.of.the [.argument | .arguments]",
+        "base": "#brace",
+        "arguments": [
+            {
+                "type": "keyword",
+                "value": ".does"
+            },
+            {
+                "type": "keyword",
+                "value": ".not"
+            },
+            {
+                "type": "keyword",
+                "value": ".represent"
+            },
+            {
+                "type": "keyword",
+                "value": ".the"
+            },
+            {
+                "type": "keyword",
+                "value": ".start"
+            },
+            {
+                "type": "keyword",
+                "value": ".of"
+            },
+            {
+                "type": "keyword",
+                "value": ".the"
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".argument"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".arguments"
+                    }
+                ]
+            }
+        ]
+    }
+]

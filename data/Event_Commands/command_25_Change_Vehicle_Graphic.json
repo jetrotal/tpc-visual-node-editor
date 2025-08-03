@@ -1,0 +1,33 @@
+[
+    {
+        "command": "@vehicle.body",
+        "template": "@vehicle.body [.boat | .ship | .airship] (String), (Numeric)",
+        "base": "@vehicle.body",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".boat"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".ship"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".airship"
+                    }
+                ]
+            },
+            {
+                "type": "String"
+            },
+            {
+                "type": "Numeric"
+            }
+        ]
+    }
+]

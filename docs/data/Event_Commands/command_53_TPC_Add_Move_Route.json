@@ -1,0 +1,305 @@
+[
+    {
+        "command": "@ev.addAction",
+        "template": "@ev.addAction (MoveRouteCommand)",
+        "base": "@ev.addAction",
+        "arguments": [
+            {
+                "type": "choice",
+                "name": "MoveRouteCommand",
+                "options": [
+                    {
+                        "type": "subcommand",
+                        "name": ".moveUp",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".moveRight",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".moveDown",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".moveLeft",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".moveUpperRight",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".moveLowerRight",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".moveUpperLeft",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".moveLowerLeft",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".moveRandom",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".moveToward",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".moveAway",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".moveForward",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".move",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".faceUp"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".faceRight"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".faceDown"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".faceLeft"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".turnRight"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".turnLeft"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".turnBack"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".turnSide"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".turnRandom"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".turnToward"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".turnAway"
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".face",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".pause"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".beginJump"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".endJump"
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".jump",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".fixDir"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".unfixDir"
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".setBody",
+                        "arguments": [
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".se",
+                        "arguments": [
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".beginThrough"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".endThrough"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".pauseAnim"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".resumeAnim"
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".speed",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".freq",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".switch",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".trans",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

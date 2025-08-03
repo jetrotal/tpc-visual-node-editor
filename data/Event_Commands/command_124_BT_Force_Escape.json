@@ -1,0 +1,45 @@
+[
+    {
+        "command": "@btl.forceEscape",
+        "template": "@btl.forceEscape [.party | .troop | .enemy(Numeric | Variable)] [.cancelIfSideAttack]",
+        "base": "@btl.forceEscape",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".party"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".troop"
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".enemy",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "keyword",
+                "value": ".cancelIfSideAttack",
+                "optional": true
+            }
+        ]
+    }
+]

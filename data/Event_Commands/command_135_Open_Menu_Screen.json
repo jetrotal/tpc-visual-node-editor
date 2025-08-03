@@ -1,0 +1,8 @@
+[
+    {
+        "command": "@sys.partyMenu",
+        "template": "@sys.partyMenu",
+        "base": "@sys.partyMenu",
+        "arguments": []
+    }
+]

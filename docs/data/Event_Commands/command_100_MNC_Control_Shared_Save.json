@@ -1,0 +1,132 @@
+[
+    {
+        "command": "@gsave",
+        "template": "@gsave [.open | .close | .save | .saveAndClose]",
+        "base": "@gsave",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".open"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".close"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".save"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".saveAndClose"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "command": "[gs|gv|gt]",
+        "template": "[gs|gv|gt][Numeric | Variable] [.copyTo | .copyFrom] (Variable | Switch | String), (Numeric | Variable)",
+        "base": null,
+        "arguments": [
+            {
+                "type": "group",
+                "content": [
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "base",
+                                "name": "gs",
+                                "array_parameter": {
+                                    "type": "choice",
+                                    "options": [
+                                        {
+                                            "type": "Numeric"
+                                        },
+                                        {
+                                            "type": "Variable"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "base",
+                                "name": "gv",
+                                "array_parameter": {
+                                    "type": "choice",
+                                    "options": [
+                                        {
+                                            "type": "Numeric"
+                                        },
+                                        {
+                                            "type": "Variable"
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "base",
+                                "name": "gt",
+                                "array_parameter": {
+                                    "type": "choice",
+                                    "options": [
+                                        {
+                                            "type": "Numeric"
+                                        },
+                                        {
+                                            "type": "Variable"
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "optional": true,
+                        "options": [
+                            {
+                                "type": "subcommand",
+                                "name": ".copyTo"
+                            },
+                            {
+                                "type": "subcommand",
+                                "name": ".copyFrom"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Variable"
+                            },
+                            {
+                                "type": "Switch"
+                            },
+                            {
+                                "type": "String"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

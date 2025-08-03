@@ -1,0 +1,23 @@
+[
+    {
+        "command": "#copyMode",
+        "template": "#copyMode [.backup | .force]",
+        "base": "#copyMode",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".backup"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".force"
+                    }
+                ]
+            }
+        ]
+    }
+]

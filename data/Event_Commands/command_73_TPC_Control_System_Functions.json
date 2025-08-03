@@ -1,0 +1,44 @@
+[
+    {
+        "command": "@sys.limitation",
+        "template": "@sys.limitation {\n        [.saveMenu] [.partyMenu] [.toggleScreen] [.optionMenu] [.debugMenu] [.f12]\n    }",
+        "base": "@sys.limitation",
+        "arguments": [
+            {
+                "type": "block",
+                "content": [
+                    {
+                        "type": "keyword",
+                        "value": ".saveMenu",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".partyMenu",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".toggleScreen",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".optionMenu",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".debugMenu",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".f12",
+                        "optional": true
+                    }
+                ]
+            }
+        ]
+    }
+]

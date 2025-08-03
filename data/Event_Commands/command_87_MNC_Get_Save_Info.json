@@ -1,0 +1,128 @@
+[
+    {
+        "command": "@save.getInfo",
+        "template": "@save[Numeric | Variable].getInfo \n        [.datetime(Variable, Variable)] \n        [.leader(Variable, Variable)] \n        [.level(Variable)] \n        [.hp(Variable)] \n        [.name(String)] \n        [.face(Numeric|Variable, Numeric|Variable, Numeric|Variable, Numeric|Variable)]",
+        "base": "@save",
+        "subcommand": ".getInfo",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "subcommand",
+                "name": ".datetime",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "Variable"
+                    },
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".leader",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "Variable"
+                    },
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".level",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".hp",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".name",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "String"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".face",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

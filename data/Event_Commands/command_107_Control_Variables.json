@@ -1,0 +1,56 @@
+[
+    {
+        "command": "v",
+        "template": "v[Numeric | Variable | Numeric..Numeric] [=|+=|-=|*=|/=|%=] (Value)",
+        "base": "v",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                },
+                {
+                    "type": "Numeric..Numeric"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "assignment",
+                        "value": "="
+                    },
+                    {
+                        "type": "assignment",
+                        "value": "+="
+                    },
+                    {
+                        "type": "assignment",
+                        "value": "-="
+                    },
+                    {
+                        "type": "assignment",
+                        "value": "*="
+                    },
+                    {
+                        "type": "assignment",
+                        "value": "/="
+                    },
+                    {
+                        "type": "assignment",
+                        "value": "%="
+                    }
+                ]
+            },
+            {
+                "type": "Value"
+            }
+        ]
+    }
+]

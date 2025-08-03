@@ -1,0 +1,8 @@
+[
+    {
+        "command": "@sys.reset",
+        "template": "@sys.reset",
+        "base": "@sys.reset",
+        "arguments": []
+    }
+]

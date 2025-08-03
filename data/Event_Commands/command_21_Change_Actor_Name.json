@@ -1,0 +1,24 @@
+[
+    {
+        "command": "@actor.name",
+        "template": "@actor[Numeric | Variable].name (String)",
+        "base": "@actor",
+        "subcommand": ".name",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "String"
+            }
+        ]
+    }
+]

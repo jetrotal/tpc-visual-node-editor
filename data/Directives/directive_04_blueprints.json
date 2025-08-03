@@ -1,0 +1,39 @@
+[
+    {
+        "command": "#blueprints",
+        "template": "#blueprints [.db(String)] [.map(String)] [.tree(String)]",
+        "base": "#blueprints",
+        "arguments": [
+            {
+                "type": "subcommand",
+                "name": ".db",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "String"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".map",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "String"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".tree",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "String"
+                    }
+                ]
+            }
+        ]
+    }
+]

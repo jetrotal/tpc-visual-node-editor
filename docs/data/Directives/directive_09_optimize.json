@@ -1,0 +1,12 @@
+[
+    {
+        "command": "#optimize",
+        "template": "#optimize (Numeric)",
+        "base": "#optimize",
+        "arguments": [
+            {
+                "type": "Numeric"
+            }
+        ]
+    }
+]

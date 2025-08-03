@@ -1,0 +1,8 @@
+[
+    {
+        "command": "@sys.shutdown",
+        "template": "@sys.shutdown",
+        "base": "@sys.shutdown",
+        "arguments": []
+    }
+]

@@ -1,0 +1,35 @@
+[
+    {
+        "command": "@actor.face",
+        "template": "@actor[Numeric | Variable].face (String), (Numeric | Variable)",
+        "base": "@actor",
+        "subcommand": ".face",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "String"
+            },
+            {
+                "type": "choice",
+                "options": [
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            }
+        ]
+    }
+]

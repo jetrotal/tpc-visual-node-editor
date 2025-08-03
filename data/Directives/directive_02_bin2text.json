@@ -1,0 +1,44 @@
+[
+    {
+        "command": "#bin2text",
+        "template": "#bin2text [.db(String)] [.map(String)] [.tree(String)] [(Numeric)...]",
+        "base": "#bin2text",
+        "arguments": [
+            {
+                "type": "subcommand",
+                "name": ".db",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "String"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".map",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "String"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".tree",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "String"
+                    }
+                ]
+            },
+            {
+                "type": "Numeric",
+                "optional": true,
+                "repeatable": true
+            }
+        ]
+    }
+]

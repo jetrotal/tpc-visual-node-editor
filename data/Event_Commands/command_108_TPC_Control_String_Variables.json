@@ -1,0 +1,436 @@
+[
+    {
+        "command": "t",
+        "template": "t[Numeric|Variable|Numeric..Numeric] (Operation)",
+        "base": "t",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                },
+                {
+                    "type": "Numeric..Numeric"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "choice",
+                "name": "Operation",
+                "options": [
+                    {
+                        "type": "subcommand",
+                        "name": ".asg",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "String"
+                                    },
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Switch"
+                                    },
+                                    {
+                                        "type": "NameOperand"
+                                    },
+                                    {
+                                        "type": "DescOperand"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "subcommand",
+                                "name": ".min",
+                                "optional": true,
+                                "arguments": [
+                                    {
+                                        "type": "Numeric"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".extract",
+                                "optional": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".cat",
+                        "arguments": [
+                            {
+                                "type": "String"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".ins",
+                        "arguments": [
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".extract",
+                                "optional": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".remove",
+                        "arguments": [
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".extract",
+                                "optional": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".rep",
+                        "arguments": [
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".extract",
+                                "optional": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".exRep",
+                        "arguments": [
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".first",
+                                "optional": true
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".extract",
+                                "optional": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".subs",
+                        "arguments": [
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".extract",
+                                "optional": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".join",
+                        "arguments": [
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "Variable"
+                            },
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".extract",
+                                "optional": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".file",
+                        "arguments": [
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "choice",
+                                "optional": true,
+                                "options": [
+                                    {
+                                        "type": "keyword",
+                                        "value": ".sjis"
+                                    },
+                                    {
+                                        "type": "keyword",
+                                        "value": ".utf8"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".extract",
+                                "optional": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".toNum",
+                        "arguments": [
+                            {
+                                "type": "Variable"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".extract",
+                                "optional": true
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".hex",
+                                "optional": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".getLen",
+                        "arguments": [
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".inStr",
+                        "arguments": [
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "Variable"
+                            },
+                            {
+                                "type": "subcommand",
+                                "name": ".beg",
+                                "optional": true,
+                                "arguments": [
+                                    {
+                                        "type": "Numeric"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".extract",
+                                "optional": true
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".hex",
+                                "optional": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".exInStr",
+                        "arguments": [
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "Variable"
+                            },
+                            {
+                                "type": "subcommand",
+                                "name": ".beg",
+                                "optional": true,
+                                "arguments": [
+                                    {
+                                        "type": "Numeric"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".extract",
+                                "optional": true
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".hex",
+                                "optional": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".exMatch",
+                        "arguments": [
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "Variable"
+                            },
+                            {
+                                "type": "subcommand",
+                                "name": ".beg",
+                                "optional": true,
+                                "arguments": [
+                                    {
+                                        "type": "Numeric"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".extract",
+                                "optional": true
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".hex",
+                                "optional": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".split",
+                        "arguments": [
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "Variable"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".extract",
+                                "optional": true
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".hex",
+                                "optional": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".toFile",
+                        "arguments": [
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "choice",
+                                "optional": true,
+                                "options": [
+                                    {
+                                        "type": "keyword",
+                                        "value": ".sjis"
+                                    },
+                                    {
+                                        "type": "keyword",
+                                        "value": ".utf8"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".extract",
+                                "optional": true
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".hex",
+                                "optional": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".popLine",
+                        "arguments": [
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".extract",
+                                "optional": true
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".hex",
+                                "optional": true
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

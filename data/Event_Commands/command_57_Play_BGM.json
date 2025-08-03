@@ -1,0 +1,68 @@
+[
+    {
+        "command": "@bgm.play",
+        "template": "@bgm.play (String) .opt(Numeric|Variable, Numeric|Variable, Numeric|Variable, Numeric|Variable)",
+        "base": "@bgm.play",
+        "arguments": [
+            {
+                "type": "String"
+            },
+            {
+                "type": "subcommand",
+                "name": ".opt",
+                "arguments": [
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "command": "@bgm.stop",
+        "template": "@bgm.stop",
+        "base": "@bgm.stop",
+        "arguments": []
+    }
+]

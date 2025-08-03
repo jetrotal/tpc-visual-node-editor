@@ -1,0 +1,54 @@
+
+[
+    {
+        "command": "@msg.choice",
+        "template": "@msg.choice {\n        .case (String) {\n            (Event Commands)\n        }...\n        [.cancel (.ignore | Numeric | { (Event Commands) })]\n    }",
+        "base": "@msg.choice",
+        "arguments": [
+            {
+                "type": "block",
+                "content": [
+                    {
+                        "type": "subcommand",
+                        "name": ".case",
+                        "repeatable": true,
+                        "arguments": [
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "block",
+                                "content": "Event Commands"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".cancel",
+                        "optional": true,
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "keyword",
+                                        "value": ".ignore"
+                                    },
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "block",
+                                        "content": "Event Commands",
+                                        "value": "bl",
+                                        "label": "block"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

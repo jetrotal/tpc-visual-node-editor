@@ -1,0 +1,31 @@
+[
+    {
+        "command": "@actor.inputName",
+        "template": "@actor[Numeric | Variable].inputName [.kana] [.preset]",
+        "base": "@actor",
+        "subcommand": ".inputName",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "keyword",
+                "value": ".kana",
+                "optional": true
+            },
+            {
+                "type": "keyword",
+                "value": ".preset",
+                "optional": true
+            }
+        ]
+    }
+]

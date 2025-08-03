@@ -1,0 +1,12 @@
+[
+    {
+        "command": "@btl.encounterRate",
+        "template": "@btl.encounterRate (Numeric)",
+        "base": "@btl.encounterRate",
+        "arguments": [
+            {
+                "type": "Numeric"
+            }
+        ]
+    }
+]

@@ -1,0 +1,64 @@
+[
+    {
+        "command": "@sys.bgm",
+        "template": "@sys.bgm [.battle | .endBattle | .inn | .boat | .ship | .airship | .gameover] (String) .opt(Numeric, Numeric, Numeric, Numeric)",
+        "base": "@sys.bgm",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".battle"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".endBattle"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".inn"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".boat"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".ship"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".airship"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".gameover"
+                    }
+                ]
+            },
+            {
+                "type": "String"
+            },
+            {
+                "type": "subcommand",
+                "name": ".opt",
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            }
+        ]
+    }
+]

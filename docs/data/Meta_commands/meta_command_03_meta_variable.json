@@ -1,0 +1,38 @@
+
+[
+    {
+        "command": "Meta Variable",
+        "template": "$(VariableName)",
+        "base": null,
+        "arguments": [
+            {
+                "type": "String",
+                "name": "VariableName",
+                "label": "Variable Name",
+                "prefix": "$",
+                "is_identifier": true
+            }
+        ]
+    },
+    {
+        "command": "Meta Variable Assignment",
+        "template": "$(VariableName) = (Value)",
+        "base": null,
+        "arguments": [
+            {
+                "type": "String",
+                "name": "VariableName",
+                "label": "Variable Name",
+                "prefix": "$",
+                "is_identifier": true
+            },
+            {
+                "type": "assignment",
+                "value": "="
+            },
+            {
+                "type": "Value"
+            }
+        ]
+    }
+]

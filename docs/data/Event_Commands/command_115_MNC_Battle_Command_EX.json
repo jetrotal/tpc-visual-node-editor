@@ -1,0 +1,74 @@
+[
+    {
+        "command": "@btl.cmdex",
+        "template": "@btl.cmdex {\n        [.change(Numeric)]\n        [.fight(Numeric)]\n        [.auto(Numeric)]\n        [.escape(Numeric)]\n        [.win(Numeric)]\n        [.lose(Numeric)]\n    }",
+        "base": "@btl.cmdex",
+        "arguments": [
+            {
+                "type": "block",
+                "content": [
+                    {
+                        "type": "subcommand",
+                        "name": ".change",
+                        "optional": true,
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".fight",
+                        "optional": true,
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".auto",
+                        "optional": true,
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".escape",
+                        "optional": true,
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".win",
+                        "optional": true,
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".lose",
+                        "optional": true,
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,55 @@
+[
+    {
+        "command": "@actor.multipleAct",
+        "template": "@actor[Numeric | Variable].multipleAct .cmd(Numeric | Variable) .times(Numeric | Variable)",
+        "base": "@actor",
+        "subcommand": ".multipleAct",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "subcommand",
+                "name": ".cmd",
+                "arguments": [
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".times",
+                "arguments": [
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

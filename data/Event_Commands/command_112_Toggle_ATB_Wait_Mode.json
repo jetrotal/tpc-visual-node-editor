@@ -1,0 +1,13 @@
+[
+    {
+        "command": "@btl.atbMode",
+        "template": "@btl.atbMode .toggle",
+        "base": "@btl.atbMode",
+        "arguments": [
+            {
+                "type": "keyword",
+                "value": ".toggle"
+            }
+        ]
+    }
+]

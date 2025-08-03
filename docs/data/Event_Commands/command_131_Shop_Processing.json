@@ -1,0 +1,92 @@
+[
+    {
+        "command": "@shop",
+        "template": "@shop {\n        [.normal | .buyOnly | .sellOnly]\n        .msg (Numeric)\n        [(Numeric)... | .goods (Variable, Numeric | Variable)]\n        [.transaction { (Event Commands) }]\n        [.noTransaction { (Event Commands) }]\n    }",
+        "base": "@shop",
+        "arguments": [
+            {
+                "type": "block",
+                "content": [
+                    {
+                        "type": "choice",
+                        "optional": true,
+                        "options": [
+                            {
+                                "type": "keyword",
+                                "value": ".normal"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".buyOnly"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".sellOnly"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".msg",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric",
+                                "repeatable": true
+                            },
+                            {
+                                "type": "subcommand",
+                                "name": ".goods",
+                                "arguments": [
+                                    {
+                                        "type": "Variable"
+                                    },
+                                    {
+                                        "type": "choice",
+                                        "options": [
+                                            {
+                                                "type": "Numeric"
+                                            },
+                                            {
+                                                "type": "Variable"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".transaction",
+                        "optional": true,
+                        "arguments": [
+                            {
+                                "type": "block",
+                                "content": "Event Commands"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".noTransaction",
+                        "optional": true,
+                        "arguments": [
+                            {
+                                "type": "block",
+                                "content": "Event Commands"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

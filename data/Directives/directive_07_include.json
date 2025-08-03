@@ -1,0 +1,12 @@
+[
+    {
+        "command": "#include",
+        "template": "#include (String)",
+        "base": "#include",
+        "arguments": [
+            {
+                "type": "String"
+            }
+        ]
+    }
+]

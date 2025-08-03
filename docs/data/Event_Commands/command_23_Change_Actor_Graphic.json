@@ -1,0 +1,40 @@
+[
+    {
+        "command": "@actor.body",
+        "template": "@actor[Numeric | Variable].body (String), (Numeric | Variable) [.trans]",
+        "base": "@actor",
+        "subcommand": ".body",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "String"
+            },
+            {
+                "type": "choice",
+                "options": [
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            },
+            {
+                "type": "keyword",
+                "value": ".trans",
+                "optional": true
+            }
+        ]
+    }
+]

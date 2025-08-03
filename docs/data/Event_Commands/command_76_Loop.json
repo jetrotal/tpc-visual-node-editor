@@ -1,0 +1,135 @@
+[
+    {
+        "command": "@loop",
+        "template": "@loop [.inf | (Numeric | Variable)] [.dst(Variable)] { (Event Commands) }",
+        "base": "@loop",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".inf"
+                    },
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".dst",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            },
+            {
+                "type": "block",
+                "content": "Event Commands"
+            }
+        ]
+    },
+    {
+        "command": "@countUp",
+        "template": "@countUp (Range) [.dst(Variable)] { (Event Commands) }",
+        "base": "@countUp",
+        "arguments": [
+            {
+                "type": "Range"
+            },
+            {
+                "type": "subcommand",
+                "name": ".dst",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            },
+            {
+                "type": "block",
+                "content": "Event Commands"
+            }
+        ]
+    },
+    {
+        "command": "@countDown",
+        "template": "@countDown (Range) [.dst(Variable)] { (Event Commands) }",
+        "base": "@countDown",
+        "arguments": [
+            {
+                "type": "Range"
+            },
+            {
+                "type": "subcommand",
+                "name": ".dst",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            },
+            {
+                "type": "block",
+                "content": "Event Commands"
+            }
+        ]
+    },
+    {
+        "command": "@while",
+        "template": "@while (Condition) [.dst(Variable)] { (Event Commands) }",
+        "base": "@while",
+        "arguments": [
+            {
+                "type": "Condition"
+            },
+            {
+                "type": "subcommand",
+                "name": ".dst",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            },
+            {
+                "type": "block",
+                "content": "Event Commands"
+            }
+        ]
+    },
+    {
+        "command": "@doWhile",
+        "template": "@doWhile (Condition) [.dst(Variable)] { (Event Commands) }",
+        "base": "@doWhile",
+        "arguments": [
+            {
+                "type": "Condition"
+            },
+            {
+                "type": "subcommand",
+                "name": ".dst",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            },
+            {
+                "type": "block",
+                "content": "Event Commands"
+            }
+        ]
+    }
+]

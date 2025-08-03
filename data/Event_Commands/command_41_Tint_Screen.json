@@ -1,0 +1,41 @@
+[
+    {
+        "command": "@scr.tint",
+        "template": "@scr.tint .rgbs(Numeric, Numeric, Numeric, Numeric) .time(Numeric) [.wait]",
+        "base": "@scr.tint",
+        "arguments": [
+            {
+                "type": "subcommand",
+                "name": ".rgbs",
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".time",
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            },
+            {
+                "type": "keyword",
+                "value": ".wait",
+                "optional": true
+            }
+        ]
+    }
+]

@@ -1,0 +1,77 @@
+[
+    {
+        "command": "@ev.setAction",
+        "template": "@ev.setAction [.player | .boat | .ship | .airship | .self | [Array]] .freq(Numeric) [.repeat] [.skippable | .unskippable] .act {\n        (Move Route Commands)...\n    }",
+        "base": "@ev.setAction",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".player"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".boat"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".ship"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".airship"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".self"
+                    },
+                    {
+                        "type": "Array"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".freq",
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            },
+            {
+                "type": "keyword",
+                "value": ".repeat",
+                "optional": true
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".skippable"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".unskippable"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".act",
+                "arguments": [
+                    {
+                        "type": "block",
+                        "content": "Move Route Commands",
+                        "repeatable": true
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,86 @@
+[
+    {
+        "command": "@msg.opt",
+        "template": "@msg.opt {\n        [.opaq | .trans | .transparent]\n        [.top | .middle | .bottom]\n        [.varyPos]\n        [.allowEventMove]\n        [.size(Numeric, Numeric)]\n        [.font(String, Numeric)]\n    }",
+        "base": "@msg.opt",
+        "arguments": [
+            {
+                "type": "block",
+                "content": [
+                    {
+                        "type": "choice",
+                        "optional": true,
+                        "options": [
+                            {
+                                "type": "keyword",
+                                "value": ".opaq"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".trans"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".transparent"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "optional": true,
+                        "options": [
+                            {
+                                "type": "keyword",
+                                "value": ".top"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".middle"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".bottom"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".varyPos",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".allowEventMove",
+                        "optional": true
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".size",
+                        "optional": true,
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".font",
+                        "optional": true,
+                        "arguments": [
+                            {
+                                "type": "String"
+                            },
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

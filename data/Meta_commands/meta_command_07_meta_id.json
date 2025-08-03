@@ -1,0 +1,23 @@
+[
+    {
+        "command": "__id",
+        "template": "__id (Variable | Switch | String)",
+        "base": "__id",
+        "arguments": [
+            {
+                "type": "choice",
+                "options": [
+                    {
+                        "type": "Variable"
+                    },
+                    {
+                        "type": "Switch"
+                    },
+                    {
+                        "type": "String"
+                    }
+                ]
+            }
+        ]
+    }
+]

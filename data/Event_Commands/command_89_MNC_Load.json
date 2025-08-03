@@ -1,0 +1,31 @@
+[
+    {
+        "command": "@save.load",
+        "template": "@save[Numeric | Variable].load [.disableFileCheck] [.disableBlackout]",
+        "base": "@save",
+        "subcommand": ".load",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "keyword",
+                "value": ".disableFileCheck",
+                "optional": true
+            },
+            {
+                "type": "keyword",
+                "value": ".disableBlackout",
+                "optional": true
+            }
+        ]
+    }
+]

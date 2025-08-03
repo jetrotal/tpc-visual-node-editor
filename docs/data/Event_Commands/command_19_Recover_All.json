@@ -1,0 +1,31 @@
+[
+    {
+        "command": "@actor.recoverAll",
+        "template": "@actor.recoverAll .all",
+        "base": "@actor.recoverAll",
+        "arguments": [
+            {
+                "type": "keyword",
+                "value": ".all"
+            }
+        ]
+    },
+    {
+        "command": "@actor.recoverAll",
+        "template": "@actor[Numeric | Variable].recoverAll",
+        "base": "@actor",
+        "subcommand": ".recoverAll",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": []
+    }
+]

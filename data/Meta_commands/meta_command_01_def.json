@@ -1,0 +1,67 @@
+
+[
+    {
+        "command": "def",
+        "template": "def (Name) [= (Value)]",
+        "base": "def",
+        "arguments": [
+            {
+                "type": "String",
+                "name": "Name",
+                "label": "Name",
+                "is_identifier": true
+            },
+            {
+                "type": "group",
+                "optional": true,
+                "content": [
+                    {
+                        "type": "assignment",
+                        "value": "="
+                    },
+                    {
+                        "type": "Value"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "command": "def",
+        "template": "def {\n        (Name) [= (Value)]\n        ...\n    }",
+        "base": "def",
+        "arguments": [
+            {
+                "type": "block",
+                "content": [
+                    {
+                        "type": "group",
+                        "repeatable": true,
+                        "repeatable_joiner": "\n",
+                        "content": [
+                             {
+                                "type": "String",
+                                "name": "Name",
+                                "label": "Name",
+                                "is_identifier": true
+                            },
+                            {
+                                "type": "group",
+                                "optional": true,
+                                "content": [
+                                    {
+                                        "type": "assignment",
+                                        "value": "="
+                                    },
+                                    {
+                                        "type": "Value"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

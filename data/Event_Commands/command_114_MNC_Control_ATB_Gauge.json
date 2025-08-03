@@ -1,0 +1,130 @@
+[
+    {
+        "command": "@btl.atb",
+        "template": "@btl.atb [.actor[Numeric | Variable] | .member[Numeric | Variable] | .party | .enemy[Numeric | Variable] | .troop] [.set(Numeric | Variable) | .add(Numeric | Variable) | .sub(Numeric | Variable)] [.percent]",
+        "base": "@btl.atb",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "subcommand",
+                        "name": ".actor",
+                        "array_parameter": {
+                            "type": "choice",
+                            "options": [
+                                {
+                                    "type": "Numeric"
+                                },
+                                {
+                                    "type": "Variable"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".member",
+                        "array_parameter": {
+                            "type": "choice",
+                            "options": [
+                                {
+                                    "type": "Numeric"
+                                },
+                                {
+                                    "type": "Variable"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".party"
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".enemy",
+                        "array_parameter": {
+                            "type": "choice",
+                            "options": [
+                                {
+                                    "type": "Numeric"
+                                },
+                                {
+                                    "type": "Variable"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".troop"
+                    }
+                ]
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "subcommand",
+                        "name": ".set",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".add",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".sub",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "keyword",
+                "value": ".percent",
+                "optional": true
+            }
+        ]
+    }
+]

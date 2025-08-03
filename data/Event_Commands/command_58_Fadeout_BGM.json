@@ -1,0 +1,12 @@
+[
+    {
+        "command": "@bgm.fadeout",
+        "template": "@bgm.fadeout (Numeric)",
+        "base": "@bgm.fadeout",
+        "arguments": [
+            {
+                "type": "Numeric"
+            }
+        ]
+    }
+]

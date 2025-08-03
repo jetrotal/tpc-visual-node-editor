@@ -1,0 +1,8 @@
+[
+    {
+        "command": "@bgm.store",
+        "template": "@bgm.store",
+        "base": "@bgm.store",
+        "arguments": []
+    }
+]

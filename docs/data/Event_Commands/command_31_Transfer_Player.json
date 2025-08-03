@@ -1,0 +1,75 @@
+[
+    {
+        "command": "@map.setPlayerPos",
+        "template": "@map[Numeric | Variable].setPlayerPos .pos(Numeric | Variable, Numeric | Variable) [.retain | .up | .right | .down | .left]",
+        "base": "@map",
+        "subcommand": ".setPlayerPos",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "subcommand",
+                "name": ".pos",
+                "arguments": [
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".retain"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".up"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".right"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".down"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".left"
+                    }
+                ]
+            }
+        ]
+    }
+]

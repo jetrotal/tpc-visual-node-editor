@@ -1,0 +1,67 @@
+[
+    {
+        "command": "@scr.flash",
+        "template": "@scr.flash [.once(Numeric) | .begin(Numeric)] .rgbv(Numeric, Numeric, Numeric, Numeric) [.wait]",
+        "base": "@scr.flash",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "subcommand",
+                        "name": ".once",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".begin",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".rgbv",
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            },
+            {
+                "type": "keyword",
+                "value": ".wait",
+                "optional": true
+            }
+        ]
+    },
+    {
+        "command": "@scr.flash",
+        "template": "@scr.flash .end",
+        "base": "@scr.flash",
+        "arguments": [
+            {
+                "type": "keyword",
+                "value": ".end"
+            }
+        ]
+    }
+]

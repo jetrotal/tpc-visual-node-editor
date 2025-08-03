@@ -1,0 +1,12 @@
+[
+    {
+        "command": "@comment",
+        "template": "@comment (String)",
+        "base": "@comment",
+        "arguments": [
+            {
+                "type": "String"
+            }
+        ]
+    }
+]

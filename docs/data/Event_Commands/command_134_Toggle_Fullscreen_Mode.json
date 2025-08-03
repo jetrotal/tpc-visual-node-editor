@@ -1,0 +1,13 @@
+[
+    {
+        "command": "@sys.fullscreen",
+        "template": "@sys.fullscreen .toggle",
+        "base": "@sys.fullscreen",
+        "arguments": [
+            {
+                "type": "keyword",
+                "value": ".toggle"
+            }
+        ]
+    }
+]

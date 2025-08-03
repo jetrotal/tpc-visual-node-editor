@@ -1,0 +1,8 @@
+[
+    {
+        "command": "@sys.gameover",
+        "template": "@sys.gameover",
+        "base": "@sys.gameover",
+        "arguments": []
+    }
+]

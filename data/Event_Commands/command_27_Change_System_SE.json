@@ -1,0 +1,77 @@
+[
+    {
+        "command": "@sys.se",
+        "template": "@sys.se [.cursor | .decision | .cancel | .buzzer | .escape | .enemyAttack | .enemyDamage | .actorDamage | .avoid | .defeat | .item] (String) .opt(Numeric, Numeric, Numeric)",
+        "base": "@sys.se",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".cursor"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".decision"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".cancel"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".buzzer"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".escape"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".enemyAttack"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".enemyDamage"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".actorDamage"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".avoid"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".defeat"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".item"
+                    }
+                ]
+            },
+            {
+                "type": "String"
+            },
+            {
+                "type": "subcommand",
+                "name": ".opt",
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            }
+        ]
+    }
+]

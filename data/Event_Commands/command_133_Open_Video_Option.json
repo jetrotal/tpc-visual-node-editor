@@ -1,0 +1,8 @@
+[
+    {
+        "command": "@sys.optionMenu",
+        "template": "@sys.optionMenu",
+        "base": "@sys.optionMenu",
+        "arguments": []
+    }
+]

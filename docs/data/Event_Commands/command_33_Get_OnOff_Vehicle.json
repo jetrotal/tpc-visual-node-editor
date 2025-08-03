@@ -1,0 +1,8 @@
+[
+    {
+        "command": "@vehicle.ride",
+        "template": "@vehicle.ride",
+        "base": "@vehicle.ride",
+        "arguments": []
+    }
+]

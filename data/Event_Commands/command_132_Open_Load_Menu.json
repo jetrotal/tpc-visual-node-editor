@@ -1,0 +1,8 @@
+[
+    {
+        "command": "@sys.loadMenu",
+        "template": "@sys.loadMenu",
+        "base": "@sys.loadMenu",
+        "arguments": []
+    }
+]

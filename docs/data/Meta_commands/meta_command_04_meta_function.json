@@ -1,0 +1,28 @@
+
+[
+    {
+        "command": "__fn",
+        "template": "__fn (FunctionName) [$(ArgumentName)]... {\n        (Event Commands)\n    }",
+        "base": "__fn",
+        "arguments": [
+            {
+                "type": "String",
+                "name": "FunctionName",
+                "label": "Function Name",
+                "is_identifier": true
+            },
+            {
+                "type": "String",
+                "name": "ArgumentName",
+                "label": "Argument Name",
+                "prefix": "$",
+                "optional": true,
+                "repeatable": true
+            },
+            {
+                "type": "block",
+                "content": "Event Commands"
+            }
+        ]
+    }
+]

@@ -1,0 +1,91 @@
+[
+    {
+        "command": "@actor.class",
+        "template": "@actor[Numeric | Variable].class (Numeric | Variable)\n        [.initLevel | .keepLevel]\n        [.keepSkill | .initSkill | .addSkill]\n        [.keepParams | .halveParams | .level1Params | .initParams]\n        [.showMsg]",
+        "base": "@actor",
+        "subcommand": ".class",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "choice",
+                "options": [
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".initLevel"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".keepLevel"
+                    }
+                ]
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".keepSkill"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".initSkill"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".addSkill"
+                    }
+                ]
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".keepParams"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".halveParams"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".level1Params"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".initParams"
+                    }
+                ]
+            },
+            {
+                "type": "keyword",
+                "value": ".showMsg",
+                "optional": true
+            }
+        ]
+    }
+]

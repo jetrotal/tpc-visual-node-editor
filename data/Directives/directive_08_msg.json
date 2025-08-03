@@ -1,0 +1,23 @@
+[
+    {
+        "command": "#msg",
+        "template": "#msg [.none | .instant]",
+        "base": "#msg",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".none"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".instant"
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,23 @@
+[
+    {
+        "command": "@sys.menuAccess",
+        "template": "@sys.menuAccess [.on | .off]",
+        "base": "@sys.menuAccess",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".on"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".off"
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,53 @@
+[
+    {
+        "command": "@scr.weather",
+        "template": "@scr.weather [.none | .rain | .snow | .mist | .sandstorm] [.weak | .medium | .strong]",
+        "base": "@scr.weather",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".none"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".rain"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".snow"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".mist"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".sandstorm"
+                    }
+                ]
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".weak"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".medium"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".strong"
+                    }
+                ]
+            }
+        ]
+    }
+]

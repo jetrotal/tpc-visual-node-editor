@@ -1,0 +1,73 @@
+[
+    {
+        "command": "@btl.anim",
+        "template": "@btl.anim[Numeric | Variable] [.troop | .enemy(Numeric | Variable) | .party | .actor(Numeric | Variable)] [.wait]",
+        "base": "@btl.anim",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".troop"
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".enemy",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".party"
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".actor",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "keyword",
+                "value": ".wait",
+                "optional": true
+            }
+        ]
+    }
+]

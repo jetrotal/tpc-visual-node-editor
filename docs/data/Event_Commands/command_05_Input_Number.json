@@ -1,0 +1,27 @@
+[
+    {
+        "command": "@msg.inputNum",
+        "template": "@msg.inputNum .digit (Numeric) .dst (Variable)",
+        "base": "@msg.inputNum",
+        "arguments": [
+            {
+                "type": "subcommand",
+                "name": ".digit",
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".dst",
+                "arguments": [
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            }
+        ]
+    }
+]

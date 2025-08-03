@@ -1,0 +1,40 @@
+[
+    {
+        "command": "@sys.skin",
+        "template": "@sys.skin (String) [.stretch | .tiled] [.gothic | .mincho]",
+        "base": "@sys.skin",
+        "arguments": [
+            {
+                "type": "String"
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".stretch"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".tiled"
+                    }
+                ]
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".gothic"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".mincho"
+                    }
+                ]
+            }
+        ]
+    }
+]

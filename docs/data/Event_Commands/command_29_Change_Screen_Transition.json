@@ -1,0 +1,42 @@
+[
+    {
+        "command": "@sys.transition",
+        "template": "@sys.transition [.transfer_hide | .transfer_show | .beginBattle_hide | .beginBattle_show | .endBattle_hide | .endBattle_show] (Numeric)",
+        "base": "@sys.transition",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".transfer_hide"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".transfer_show"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".beginBattle_hide"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".beginBattle_show"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".endBattle_hide"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".endBattle_show"
+                    }
+                ]
+            },
+            {
+                "type": "Numeric"
+            }
+        ]
+    }
+]

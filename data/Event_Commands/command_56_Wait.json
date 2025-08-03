@@ -1,0 +1,37 @@
+[
+    {
+        "command": "@wait",
+        "template": "@wait [(Numeric | Variable)] [.frame]",
+        "base": "@wait",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            },
+            {
+                "type": "keyword",
+                "value": ".frame",
+                "optional": true
+            }
+        ]
+    },
+    {
+        "command": "@wait",
+        "template": "@wait .input",
+        "base": "@wait",
+        "arguments": [
+            {
+                "type": "keyword",
+                "value": ".input"
+            }
+        ]
+    }
+]

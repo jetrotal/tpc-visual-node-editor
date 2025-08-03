@@ -1,0 +1,108 @@
+[
+    {
+        "command": "@key.input",
+        "template": "@key.input .dst(Variable) [.wait] [.elapsed(Variable)] {\n        [.decision] [.cancel] [.number] [.symbol] [.shift]\n        [.down] [.left] [.right] [.up]\n        [.lclick] [.rclick] [.mclick] [.wheelDown] [.wheelUp]\n    }",
+        "base": "@key.input",
+        "arguments": [
+            {
+                "type": "subcommand",
+                "name": ".dst",
+                "arguments": [
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            },
+            {
+                "type": "keyword",
+                "value": ".wait",
+                "optional": true
+            },
+            {
+                "type": "subcommand",
+                "name": ".elapsed",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            },
+            {
+                "type": "block",
+                "content": [
+                    {
+                        "type": "keyword",
+                        "value": ".decision",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".cancel",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".number",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".symbol",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".shift",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".down",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".left",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".right",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".up",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".lclick",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".rclick",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".mclick",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".wheelDown",
+                        "optional": true
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".wheelUp",
+                        "optional": true
+                    }
+                ]
+            }
+        ]
+    }
+]

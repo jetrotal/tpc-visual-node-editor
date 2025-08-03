@@ -1,0 +1,68 @@
+[
+    {
+        "command": "@actor.damage",
+        "template": "@actor.damage [.all | [Array]] .value(Numeric) .defModifier(Numeric) .magModifier(Numeric) .variance(Numeric) [.dst(Variable)]",
+        "base": "@actor.damage",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".all"
+                    },
+                    {
+                        "type": "Array"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".value",
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".defModifier",
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".magModifier",
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".variance",
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".dst",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            }
+        ]
+    }
+]

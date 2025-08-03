@@ -1,0 +1,212 @@
+[
+    {
+        "command": "@sys.getInfo",
+        "template": "@sys.getInfo (InfoType) .dst (Destination)",
+        "base": "@sys.getInfo",
+        "arguments": [
+            {
+                "type": "choice",
+                "name": "InfoType",
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".mapSize"
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".tiles",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "choice",
+                                "optional": true,
+                                "options": [
+                                    {
+                                        "type": "keyword",
+                                        "value": ".lower"
+                                    },
+                                    {
+                                        "type": "keyword",
+                                        "value": ".upper"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".winSize"
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".pixel",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".ignoreA",
+                                "optional": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".interpreter.current",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".tilesetId"
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".face",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "optional": true,
+                                "options": [
+                                    {
+                                        "type": "subcommand",
+                                        "name": ".actor",
+                                        "arguments": [
+                                            {
+                                                "type": "Numeric"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "keyword",
+                                        "value": ".win"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "choice",
+                                "optional": true,
+                                "options": [
+                                    {
+                                        "type": "keyword",
+                                        "value": ".static"
+                                    },
+                                    {
+                                        "type": "keyword",
+                                        "value": ".dynamic"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".body",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "optional": true,
+                                "options": [
+                                    {
+                                        "type": "subcommand",
+                                        "name": ".actor",
+                                        "arguments": [
+                                            {
+                                                "type": "Numeric"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "subcommand",
+                                        "name": ".ev",
+                                        "arguments": [
+                                            {
+                                                "type": "Numeric"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "choice",
+                                "optional": true,
+                                "options": [
+                                    {
+                                        "type": "keyword",
+                                        "value": ".static"
+                                    },
+                                    {
+                                        "type": "keyword",
+                                        "value": ".dynamic"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".camera"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".shake"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".bgm"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".dst",
+                "arguments": [
+                    {
+                        "type": "choice",
+                        "name": "Destination",
+                        "options": [
+                            {
+                                "type": "Variable"
+                            },
+                            {
+                                "type": "group",
+                                "content": [
+                                    {
+                                        "type": "String"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

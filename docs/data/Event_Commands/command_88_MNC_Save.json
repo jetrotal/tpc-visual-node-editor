@@ -1,0 +1,31 @@
+[
+    {
+        "command": "@save.save",
+        "template": "@save[Numeric | Variable].save [.result(Variable)]",
+        "base": "@save",
+        "subcommand": ".save",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "subcommand",
+                "name": ".result",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            }
+        ]
+    }
+]

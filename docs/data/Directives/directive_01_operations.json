@@ -1,0 +1,17 @@
+[
+    {
+        "command": "#doNothing",
+        "template": "#doNothing",
+        "arguments": []
+    },
+    {
+        "command": "#apply",
+        "template": "#apply",
+        "arguments": []
+    },
+    {
+        "command": "#toClip",
+        "template": "#toClip",
+        "arguments": []
+    }
+]

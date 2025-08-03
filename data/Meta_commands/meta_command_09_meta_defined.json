@@ -1,0 +1,12 @@
+[
+    {
+        "command": "__defined",
+        "template": "__defined (Value)",
+        "base": "__defined",
+        "arguments": [
+            {
+                "type": "Value"
+            }
+        ]
+    }
+]

@@ -1,0 +1,117 @@
+[
+    {
+        "command": "@btl.getInfo",
+        "template": "@btl.getInfo [.actor(Numeric | Variable) | .member(Numeric | Variable) | .party | .enemy(Numeric | Variable) | .troop] [.buff | .state | .element | .misc | .list | .alive | .canMove] .dst(Variable)",
+        "base": "@btl.getInfo",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "subcommand",
+                        "name": ".actor",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".member",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".party"
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".enemy",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".troop"
+                    }
+                ]
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".buff"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".state"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".element"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".misc"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".list"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".alive"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".canMove"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".dst",
+                "arguments": [
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            }
+        ]
+    }
+]

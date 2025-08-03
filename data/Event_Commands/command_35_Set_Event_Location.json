@@ -1,0 +1,180 @@
+[
+    {
+        "command": "@ev.setPos",
+        "template": "@ev[Numeric | Variable].setPos .pos(Numeric | Variable, Numeric | Variable) [.retain | .up | .right | .down | .left | .face(Numeric)]",
+        "base": "@ev",
+        "subcommand": ".setPos",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "subcommand",
+                "name": ".pos",
+                "arguments": [
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".retain"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".up"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".right"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".down"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".left"
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".face",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "command": "@ev.setPos",
+        "template": "@ev.setPos [.player | .boat | .ship | .airship | .self] .pos(Numeric | Variable, Numeric | Variable) [.retain | .up | .right | .down | .left | .face(Numeric)]",
+        "base": "@ev.setPos",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".player"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".boat"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".ship"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".airship"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".self"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".pos",
+                "arguments": [
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".retain"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".up"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".right"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".down"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".left"
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".face",
+                        "arguments": [
+                            {
+                                "type": "Numeric"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

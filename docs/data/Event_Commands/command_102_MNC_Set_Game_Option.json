@@ -1,0 +1,169 @@
+[
+    {
+        "command": "@sys.gameOpt",
+        "template": "@sys.gameOpt \n        [.pauseWhenInactive | .runWhenInactive]\n        [.fatal(Numeric | Variable, Numeric, Numeric)]\n        [.picLimit(Numeric | Variable)]\n        [.animLimit(Numeric)]\n        [.fullFrame | .oneFifth | .oneThird | .oneHalf]\n        [.mouse.disableMsgProcession(Numeric)]\n        [.btlOrigin [.center | .topLeft | .bottomLeft | .topRight | .bottomRight | .top | .bottom | .left | .right]]\n        [.winFaceSize(Numeric, Numeric)]",
+        "base": "@sys.gameOpt",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".pauseWhenInactive"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".runWhenInactive"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".fatal",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".picLimit",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".animLimit",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".fullFrame"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".oneFifth"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".oneThird"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".oneHalf"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".mouse.disableMsgProcession",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".btlOrigin",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "choice",
+                        "optional": true,
+                        "options": [
+                            {
+                                "type": "keyword",
+                                "value": ".center"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".topLeft"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".bottomLeft"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".topRight"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".bottomRight"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".top"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".bottom"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".left"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".right"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".winFaceSize",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            }
+        ]
+    }
+]

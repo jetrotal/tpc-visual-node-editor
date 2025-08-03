@@ -1,0 +1,8 @@
+[
+    {
+        "command": "@ev.execAction",
+        "template": "@ev.execAction",
+        "base": "@ev.execAction",
+        "arguments": []
+    }
+]

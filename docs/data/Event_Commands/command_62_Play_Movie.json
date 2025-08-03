@@ -1,0 +1,52 @@
+[
+    {
+        "command": "@movie.play",
+        "template": "@movie.play (String) .pos(Numeric|Variable, Numeric|Variable) .size(Numeric, Numeric)",
+        "base": "@movie.play",
+        "arguments": [
+            {
+                "type": "String"
+            },
+            {
+                "type": "subcommand",
+                "name": ".pos",
+                "arguments": [
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".size",
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            }
+        ]
+    }
+]

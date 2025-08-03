@@ -1,0 +1,79 @@
+[
+    {
+        "command": "s",
+        "template": "s[Numeric | Variable | Numeric..Numeric] [.on | .off | .toggle]",
+        "base": "s",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                },
+                {
+                    "type": "Numeric..Numeric"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".on"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".off"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".toggle"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "command": "s",
+        "template": "s[Numeric | Variable | Numeric..Numeric] = [0 | 1]",
+        "base": "s",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                },
+                {
+                    "type": "Numeric..Numeric"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "assignment",
+                "value": "="
+            },
+            {
+                "type": "choice",
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": "0"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": "1"
+                    }
+                ]
+            }
+        ]
+    }
+]

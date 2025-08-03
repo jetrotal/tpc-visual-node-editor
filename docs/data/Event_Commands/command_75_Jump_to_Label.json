@@ -1,0 +1,20 @@
+[
+    {
+        "command": "@label.jump",
+        "template": "@label.jump (Numeric | String)",
+        "base": "@label.jump",
+        "arguments": [
+            {
+                "type": "choice",
+                "options": [
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "String"
+                    }
+                ]
+            }
+        ]
+    }
+]

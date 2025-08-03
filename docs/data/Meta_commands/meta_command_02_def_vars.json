@@ -1,0 +1,117 @@
+
+[
+    {
+        "command": "[defs|defv|deft]",
+        "template": "[defs | defv | deft] (Name) [= (Numeric | Numeric..Numeric)]",
+        "base": null,
+        "arguments": [
+            {
+                "type": "choice",
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": "defs"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": "defv"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": "deft"
+                    }
+                ]
+            },
+            {
+                "type": "String",
+                "name": "Name",
+                "label": "Name",
+                "is_identifier": true
+            },
+            {
+                "type": "group",
+                "optional": true,
+                "content": [
+                    {
+                        "type": "assignment",
+                        "value": "="
+                    },
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Numeric..Numeric"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "command": "[defs|defv|deft]",
+        "template": "[defs | defv | deft] {\n        (Name) [= (Numeric | Numeric..Numeric)]\n        ...\n    }",
+        "base": null,
+        "arguments": [
+            {
+                "type": "choice",
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": "defs"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": "defv"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": "deft"
+                    }
+                ]
+            },
+            {
+                "type": "block",
+                "content": [
+                   {
+                        "type": "group",
+                        "repeatable": true,
+                        "repeatable_joiner": "\n",
+                        "content": [
+                            {
+                                "type": "String",
+                                "name": "Name",
+                                "label": "Name",
+                                "is_identifier": true
+                            },
+                            {
+                                "type": "group",
+                                "optional": true,
+                                "content": [
+                                    {
+                                        "type": "assignment",
+                                        "value": "="
+                                    },
+                                    {
+                                        "type": "choice",
+                                        "options": [
+                                            {
+                                                "type": "Numeric"
+                                            },
+                                            {
+                                                "type": "Numeric..Numeric"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                   }
+                ]
+            }
+        ]
+    }
+]

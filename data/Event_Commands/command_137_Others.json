@@ -1,0 +1,28 @@
+[
+    {
+        "command": "@raw",
+        "template": "@raw (Numeric), (String), [(Numeric | Variable)]...",
+        "base": "@raw",
+        "arguments": [
+            {
+                "type": "Numeric"
+            },
+            {
+                "type": "String"
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "repeatable": true,
+                "options": [
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            }
+        ]
+    }
+]

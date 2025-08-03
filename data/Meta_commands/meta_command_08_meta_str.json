@@ -1,0 +1,13 @@
+[
+    {
+        "command": "__str",
+        "template": "__str (Value)...",
+        "base": "__str",
+        "arguments": [
+            {
+                "type": "Value",
+                "repeatable": true
+            }
+        ]
+    }
+]

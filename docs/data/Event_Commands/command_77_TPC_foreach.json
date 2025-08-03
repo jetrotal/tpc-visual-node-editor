@@ -1,0 +1,90 @@
+[
+    {
+        "command": "@foreach",
+        "template": "@foreach [Array] .dst(Variable, Variable) { (Event Commands) }",
+        "base": "@foreach",
+        "arguments": [
+            {
+                "type": "Array"
+            },
+            {
+                "type": "subcommand",
+                "name": ".dst",
+                "arguments": [
+                    {
+                        "type": "Variable"
+                    },
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            },
+            {
+                "type": "block",
+                "content": "Event Commands"
+            }
+        ]
+    },
+    {
+        "command": "@foreach",
+        "template": "@foreach (Variable) .cnt(Numeric) .dst(Variable, Variable) { (Event Commands) }",
+        "base": "@foreach",
+        "arguments": [
+            {
+                "type": "Variable"
+            },
+            {
+                "type": "subcommand",
+                "name": ".cnt",
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            },
+            {
+                "type": "subcommand",
+                "name": ".dst",
+                "arguments": [
+                    {
+                        "type": "Variable"
+                    },
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            },
+            {
+                "type": "block",
+                "content": "Event Commands"
+            }
+        ]
+    },
+    {
+        "command": "@foreach",
+        "template": "@foreach .mev .dst(Variable, Variable) { (Event Commands) }",
+        "base": "@foreach",
+        "arguments": [
+            {
+                "type": "keyword",
+                "value": ".mev"
+            },
+            {
+                "type": "subcommand",
+                "name": ".dst",
+                "arguments": [
+                    {
+                        "type": "Variable"
+                    },
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            },
+            {
+                "type": "block",
+                "content": "Event Commands"
+            }
+        ]
+    }
+]

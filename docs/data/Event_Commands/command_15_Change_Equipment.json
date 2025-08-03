@@ -1,0 +1,126 @@
+[
+    {
+        "command": "@actor.equipment",
+        "template": "@actor[Numeric | Variable].equipment [.add(Numeric | Variable) | .removeWeapon | .removeShield | .removeHelm | .removeArmor | .removeAccessory | .clear]",
+        "base": "@actor",
+        "subcommand": ".equipment",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "subcommand",
+                        "name": ".add",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".removeWeapon"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".removeShield"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".removeHelm"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".removeArmor"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".removeAccessory"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".clear"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "command": "@actor.equipment",
+        "template": "@actor.equipment .all [.add(Numeric | Variable) | .removeWeapon | .removeShield | .removeHelm | .removeArmor | .removeAccessory | .clear]",
+        "base": "@actor.equipment",
+        "arguments": [
+            {
+                "type": "keyword",
+                "value": ".all"
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "subcommand",
+                        "name": ".add",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".removeWeapon"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".removeShield"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".removeHelm"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".removeArmor"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".removeAccessory"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".clear"
+                    }
+                ]
+            }
+        ]
+    }
+]

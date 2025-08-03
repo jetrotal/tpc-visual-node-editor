@@ -1,0 +1,48 @@
+[
+    {
+        "command": "__if",
+        "template": "__if (Condition) {\n        (Event Commands)\n    } [.elif (Condition) {\n        (Event Commands)\n    }]... [.else {\n        (Event Commands)\n    }]",
+        "base": "__if",
+        "arguments": [
+            {
+                "type": "Condition"
+            },
+            {
+                "type": "block",
+                "content": "Event Commands"
+            },
+            {
+                "type": "group",
+                "optional": true,
+                "repeatable": true,
+                "content": [
+                    {
+                        "type": "keyword",
+                        "value": ".elif"
+                    },
+                    {
+                        "type": "Condition"
+                    },
+                    {
+                        "type": "block",
+                        "content": "Event Commands"
+                    }
+                ]
+            },
+            {
+                "type": "group",
+                "optional": true,
+                "content": [
+                    {
+                        "type": "keyword",
+                        "value": ".else"
+                    },
+                    {
+                        "type": "block",
+                        "content": "Event Commands"
+                    }
+                ]
+            }
+        ]
+    }
+]

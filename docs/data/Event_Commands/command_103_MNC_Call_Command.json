@@ -1,0 +1,75 @@
+[
+    {
+        "command": "@cmd",
+        "template": "@cmd (Numeric | Variable), (String), [[(Numeric | Variable)...] | `[(Expression)...]` | .args((Variable), (Numeric | Variable))]",
+        "base": "@cmd",
+        "arguments": [
+            {
+                "type": "choice",
+                "options": [
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Variable"
+                    }
+                ]
+            },
+            {
+                "type": "String"
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "Array",
+                        "content": {
+                            "type": "choice",
+                            "options": [
+                                {
+                                    "type": "Numeric"
+                                },
+                                {
+                                    "type": "Variable"
+                                }
+                            ],
+                            "repeatable": true
+                        }
+                    },
+                    {
+                        "type": "Array",
+                        "content": {
+                            "type": "Expression",
+                            "repeatable": true
+                        },
+                        "delimiters": [
+                            "`[",
+                            "]`"
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".args",
+                        "arguments": [
+                            {
+                                "type": "Variable"
+                            },
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

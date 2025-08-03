@@ -1,0 +1,57 @@
+[
+    {
+        "command": "@se.play",
+        "template": "@se.play (String) .opt(Numeric|Variable, Numeric|Variable, Numeric|Variable)",
+        "base": "@se.play",
+        "arguments": [
+            {
+                "type": "String"
+            },
+            {
+                "type": "subcommand",
+                "name": ".opt",
+                "arguments": [
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "choice",
+                        "options": [
+                            {
+                                "type": "Numeric"
+                            },
+                            {
+                                "type": "Variable"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "command": "@se.stop",
+        "template": "@se.stop",
+        "base": "@se.stop",
+        "arguments": []
+    }
+]

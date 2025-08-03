@@ -1,0 +1,19 @@
+[
+    {
+        "command": "@break",
+        "template": "@break [.level(Numeric)]",
+        "base": "@break",
+        "arguments": [
+            {
+                "type": "subcommand",
+                "name": ".level",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            }
+        ]
+    }
+]

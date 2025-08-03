@@ -1,0 +1,24 @@
+[
+    {
+        "command": "@actor.nickname",
+        "template": "@actor[Numeric | Variable].nickname (String)",
+        "base": "@actor",
+        "subcommand": ".nickname",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "String"
+            }
+        ]
+    }
+]

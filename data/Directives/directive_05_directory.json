@@ -1,0 +1,12 @@
+[
+    {
+        "command": "#directory",
+        "template": "#directory (String)",
+        "base": "#directory",
+        "arguments": [
+            {
+                "type": "String"
+            }
+        ]
+    }
+]

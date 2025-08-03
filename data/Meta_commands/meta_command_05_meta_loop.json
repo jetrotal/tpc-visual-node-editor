@@ -1,0 +1,56 @@
+
+[
+    {
+        "command": "__loop",
+        "template": "__loop (Numeric) [$(IndexVariable)] {\n        (Event Commands)\n    }",
+        "base": "__loop",
+        "arguments": [
+            {
+                "type": "Numeric"
+            },
+            {
+                "type": "String",
+                "name": "IndexVariable",
+                "label": "Index Var",
+                "prefix": "$",
+                "optional": true
+            },
+            {
+                "type": "block",
+                "content": "Event Commands"
+            }
+        ]
+    },
+    {
+        "command": "__loop",
+        "template": "__loop [Array] [$(ElementVariable)] [$(IndexVariable)] {\n        (Event Commands)\n    }",
+        "base": "__loop",
+        "arguments": [
+            {
+                "type": "Array",
+                "content": {
+                    "type": "String"
+                },
+                "separator": " "
+            },
+            {
+                "type": "String",
+                "name": "ElementVariable",
+                "label": "Element Var",
+                "prefix": "$",
+                "optional": true
+            },
+            {
+                "type": "String",
+                "name": "IndexVariable",
+                "label": "Index Var",
+                "prefix": "$",
+                "optional": true
+            },
+            {
+                "type": "block",
+                "content": "Event Commands"
+            }
+        ]
+    }
+]

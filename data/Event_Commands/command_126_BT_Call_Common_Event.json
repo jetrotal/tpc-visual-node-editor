@@ -1,0 +1,19 @@
+[
+    {
+        "command": "@btl.cev",
+        "template": "@btl.cev[Numeric | Variable]",
+        "base": "@btl.cev",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": []
+    }
+]

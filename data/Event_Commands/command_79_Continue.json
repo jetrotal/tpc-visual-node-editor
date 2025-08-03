@@ -1,0 +1,19 @@
+[
+    {
+        "command": "@continue",
+        "template": "@continue [.level(Numeric)]",
+        "base": "@continue",
+        "arguments": [
+            {
+                "type": "subcommand",
+                "name": ".level",
+                "optional": true,
+                "arguments": [
+                    {
+                        "type": "Numeric"
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,57 @@
+[
+    {
+        "command": "@sys.call",
+        "template": "@sys.call [.saveMenu | .loadMenu | .partyMenu | .optionMenu | .licenseMenu | .debugMenu [.pause] | .toggleScreen | .f12]",
+        "base": "@sys.call",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".saveMenu"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".loadMenu"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".partyMenu"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".optionMenu"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".licenseMenu"
+                    },
+                    {
+                        "type": "group",
+                        "content": [
+                            {
+                                "type": "keyword",
+                                "value": ".debugMenu"
+                            },
+                            {
+                                "type": "keyword",
+                                "value": ".pause",
+                                "optional": true
+                            }
+                        ]
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".toggleScreen"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".f12"
+                    }
+                ]
+            }
+        ]
+    }
+]

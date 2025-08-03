@@ -1,0 +1,36 @@
+[
+    {
+        "command": "@ev.swap",
+        "template": "@ev[Numeric | Variable].swap (Numeric | Variable | .self)",
+        "base": "@ev",
+        "subcommand": ".swap",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "choice",
+                "options": [
+                    {
+                        "type": "Numeric"
+                    },
+                    {
+                        "type": "Variable"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".self"
+                    }
+                ]
+            }
+        ]
+    }
+]

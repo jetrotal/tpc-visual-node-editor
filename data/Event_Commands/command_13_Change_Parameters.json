@@ -1,0 +1,172 @@
+[
+    {
+        "command": "@actor.param",
+        "template": "@actor[Numeric | Variable].param [.hp | .mp | .atk | .def | .mag | .spd] [.add(Numeric | Variable) | .sub(Numeric | Variable)]",
+        "base": "@actor",
+        "subcommand": ".param",
+        "array_parameter": {
+            "type": "choice",
+            "options": [
+                {
+                    "type": "Numeric"
+                },
+                {
+                    "type": "Variable"
+                }
+            ]
+        },
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".hp"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".mp"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".atk"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".def"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".mag"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".spd"
+                    }
+                ]
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "subcommand",
+                        "name": ".add",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".sub",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "command": "@actor.param",
+        "template": "@actor.param .all [.hp | .mp | .atk | .def | .mag | .spd] [.add(Numeric | Variable) | .sub(Numeric | Variable)]",
+        "base": "@actor.param",
+        "arguments": [
+            {
+                "type": "keyword",
+                "value": ".all"
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".hp"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".mp"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".atk"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".def"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".mag"
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".spd"
+                    }
+                ]
+            },
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "subcommand",
+                        "name": ".add",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".sub",
+                        "arguments": [
+                            {
+                                "type": "choice",
+                                "options": [
+                                    {
+                                        "type": "Numeric"
+                                    },
+                                    {
+                                        "type": "Variable"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

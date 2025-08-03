@@ -1,0 +1,80 @@
+[
+    {
+        "command": "@if",
+        "template": "@if t[Numeric | Variable] [.eq(String) | .neq(String) | .contains(String) | .notContains(String)] [.ignoreCase] {\n            (Event Commands)\n        }",
+        "base": "@if",
+        "arguments": [
+            {
+                "type": "group",
+                "content": [
+                    {
+                        "type": "base",
+                        "name": "t",
+                        "array_parameter": {
+                            "type": "choice",
+                            "options": [
+                                {
+                                    "type": "Numeric"
+                                },
+                                {
+                                    "type": "Variable"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "type": "choice",
+                        "optional": true,
+                        "options": [
+                            {
+                                "type": "subcommand",
+                                "name": ".eq",
+                                "arguments": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "subcommand",
+                                "name": ".neq",
+                                "arguments": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "subcommand",
+                                "name": ".contains",
+                                "arguments": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "subcommand",
+                                "name": ".notContains",
+                                "arguments": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "keyword",
+                        "value": ".ignoreCase",
+                        "optional": true
+                    }
+                ]
+            },
+            {
+                "type": "block",
+                "content": "Event Commands"
+            }
+        ]
+    }
+]

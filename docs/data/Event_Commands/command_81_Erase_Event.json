@@ -1,0 +1,39 @@
+[
+    {
+        "command": "@ev.erase",
+        "template": "@ev.erase [.self | .ev[Numeric | Variable]] [.return]",
+        "base": "@ev.erase",
+        "arguments": [
+            {
+                "type": "choice",
+                "optional": true,
+                "options": [
+                    {
+                        "type": "keyword",
+                        "value": ".self"
+                    },
+                    {
+                        "type": "subcommand",
+                        "name": ".ev",
+                        "array_parameter": {
+                            "type": "choice",
+                            "options": [
+                                {
+                                    "type": "Numeric"
+                                },
+                                {
+                                    "type": "Variable"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
+                "type": "keyword",
+                "value": ".return",
+                "optional": true
+            }
+        ]
+    }
+]
