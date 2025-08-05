@@ -46,3 +46,7 @@ body {
 .react-flow__panel.react-flow__attribution {
   display: none;
 }
+
+.react-flow__panel.react-flow__controls {
+border-radius: 0px !important;
+}
