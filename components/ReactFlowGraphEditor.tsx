@@ -1,3 +1,4 @@
+
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -32,6 +33,8 @@ import { ReactFlowCustomNode } from '@/components/ReactFlowCustomNode';
 import { CustomEdge } from '@/components/CustomEdge';
 import { SOCKET_COLORS } from '@/config';
 import { generateNodeSockets } from '@/engine/nodeFactory';
+import { GraphContext } from '@/contexts/GraphContext';
+
 
 interface ReactFlowGraphEditorProps {
   graph: Graph;
@@ -108,21 +111,6 @@ const ReactFlowComponent = ({
 
   // Convert our custom graph format to ReactFlow format
   const convertToReactFlowNodes = useCallback((nodes: NodeInstance[]): Node[] => {
-    // Create enriched connections with resolved values
-    const enrichedConnections = graph.connections.map(conn => {
-      const sourceNode = graph.nodes.find(n => n.id === conn.fromNode);
-      if (!sourceNode) return conn;
-      
-      // Extract socket key from fromSocket
-      const socketKey = conn.fromSocket.replace(`${conn.fromNode}-`, '');
-      const value = sourceNode.values[socketKey];
-      
-      return {
-        ...conn,
-        resolvedValue: value || `Connected from ${conn.fromNode}`
-      };
-    });
-
     return nodes.map((node) => {
       // Generate current sockets based on node state
       const sockets = generateNodeSockets(node);
@@ -140,8 +128,6 @@ const ReactFlowComponent = ({
         position: node.position,
         data: {
           nodeData: updatedNode,
-          connections: enrichedConnections, // Pass enriched connections with resolved values
-          allNodes: graph.nodes, // Pass all nodes for value resolution
           onValueChange,
           onToggleExpansion,
           onRepeatableChange,
@@ -151,7 +137,7 @@ const ReactFlowComponent = ({
         draggable: true,
       };
     });
-  }, [onValueChange, onToggleExpansion, onRepeatableChange, handleDeleteNode, graph.connections, graph.nodes]);
+  }, [onValueChange, onToggleExpansion, onRepeatableChange, handleDeleteNode]);
 
   const convertToReactFlowEdges = useCallback((connections: CustomConnection[]): Edge[] => {
     return connections.map((conn) => {
@@ -377,71 +363,73 @@ const ReactFlowComponent = ({
       onDrop={onDrop} 
       onDragOver={onDragOver}
     >
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-        onNodeDragStart={onNodeDragStart}
-        onNodeDragStop={onNodeDragStop}
-        nodeTypes={nodeTypes}
-        edgeTypes={edgeTypes}
-        connectionMode={ConnectionMode.Strict}
-        nodesDraggable={true}
-        nodesConnectable={true}
-        elementsSelectable={true}
-        minZoom={0.1}
-        maxZoom={2}
-        style={{ background: '#1a1d21' }}
-        defaultEdgeOptions={{
-          type: 'customEdge',
-          style: { 
-            stroke: '#4a90e2', 
-            strokeWidth: 2 
-          },
-        }}
-      >
-        <Background 
-          variant={BackgroundVariant.Dots} 
-          gap={20} 
-          size={1}
-          color="#444"
-          style={{ opacity: 0.6 }}
-        />
-        <Controls 
-          style={{
-            background: '#2c3035',
-            border: '1px solid #444',
-            borderRadius: '8px',
+      <GraphContext.Provider value={{ graph }}>
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+          onNodeDragStart={onNodeDragStart}
+          onNodeDragStop={onNodeDragStop}
+          nodeTypes={nodeTypes}
+          edgeTypes={edgeTypes}
+          connectionMode={ConnectionMode.Strict}
+          nodesDraggable={true}
+          nodesConnectable={true}
+          elementsSelectable={true}
+          minZoom={0.1}
+          maxZoom={2}
+          style={{ background: '#1a1d21' }}
+          defaultEdgeOptions={{
+            type: 'customEdge',
+            style: { 
+              stroke: '#4a90e2', 
+              strokeWidth: 2 
+            },
           }}
-        />
-        <MiniMap 
-          nodeStrokeWidth={3}
-          nodeColor={(node) => {
-            if (node.type === 'customNode') return '#4a90e2';
-            return '#2c3035';
-          }}
-          style={{
-            backgroundColor: '#1a1d21',
-            border: '1px solid #444',
-            borderRadius: '8px',
-          }}
-          maskColor="rgba(26, 29, 33, 0.8)"
-        />
-        <Panel position="top-left">
-          <div style={{ 
-            backgroundColor: 'var(--bg-color)', 
-            padding: '8px', 
-            borderRadius: '4px',
-            border: '1px solid var(--border-color)',
-            fontSize: '0.8em',
-            color: 'var(--text-color)'
-          }}>
-            Nodes: {nodes.length} | Connections: {edges.length}
-          </div>
-        </Panel>
-      </ReactFlow>
+        >
+          <Background 
+            variant={BackgroundVariant.Dots} 
+            gap={20} 
+            size={1}
+            color="#444"
+            style={{ opacity: 0.6 }}
+          />
+          <Controls 
+            style={{
+              background: '#2c3035',
+              border: '1px solid #444',
+              borderRadius: '8px',
+            }}
+          />
+          <MiniMap 
+            nodeStrokeWidth={3}
+            nodeColor={(node) => {
+              if (node.type === 'customNode') return '#4a90e2';
+              return '#2c3035';
+            }}
+            style={{
+              backgroundColor: '#1a1d21',
+              border: '1px solid #444',
+              borderRadius: '8px',
+            }}
+            maskColor="rgba(26, 29, 33, 0.8)"
+          />
+          <Panel position="top-left">
+            <div style={{ 
+              backgroundColor: 'var(--bg-color)', 
+              padding: '8px', 
+              borderRadius: '4px',
+              border: '1px solid var(--border-color)',
+              fontSize: '0.8em',
+              color: 'var(--text-color)'
+            }}>
+              Nodes: {nodes.length} | Connections: {edges.length}
+            </div>
+          </Panel>
+        </ReactFlow>
+      </GraphContext.Provider>
     </div>
   );
 };

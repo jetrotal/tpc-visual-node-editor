@@ -1,13 +1,12 @@
-import React, { memo, useMemo } from 'react';
+import React, { memo, useMemo, useContext } from 'react';
 import { NodeProps } from '@xyflow/react';
 import { NodeInstance, SocketDef, Connection } from '@/types';
 import { ArgumentRenderer } from '@/components/Argument';
 import { SocketHandle } from '@/components/SocketHandle';
+import { GraphContext } from '@/contexts/GraphContext';
 
 interface CustomNodeData {
   nodeData: NodeInstance;
-  connections: Connection[];
-  allNodes: NodeInstance[];
   onValueChange: (nodeId: string, key: string, value: any) => void;
   onToggleExpansion: (nodeId: string) => void;
   onRepeatableChange: (nodeId: string, key: string, type: 'add' | 'remove', index?: number) => void;
@@ -19,8 +18,9 @@ type CustomNodeProps = NodeProps & {
 };
 
 const ReactFlowCustomNodeComponent = memo(({ data, id, selected }: CustomNodeProps) => {
-  const { nodeData, connections, allNodes, onValueChange, onToggleExpansion, onRepeatableChange, onDelete } = data;
-  
+  const { nodeData, onValueChange, onToggleExpansion, onRepeatableChange, onDelete } = data;
+  const { graph } = useContext(GraphContext)!;
+
   const hasComplexArgs = nodeData.definition.nodeDef.arguments?.length > 0 || nodeData.definition.nodeDef.array_parameter;
 
   // Filter exec outputs: always show main exec_out with unique ID to avoid conflicts
@@ -41,6 +41,22 @@ const ReactFlowCustomNodeComponent = memo(({ data, id, selected }: CustomNodePro
         }
       });
   }, [nodeData.sockets]);
+  
+  const enrichedConnections = useMemo(() => {
+    return graph.connections.map(conn => {
+      const sourceNode = graph.nodes.find(n => n.id === conn.fromNode);
+      if (!sourceNode) return conn;
+      
+      const socketKey = conn.fromSocket.replace(`${conn.fromNode}-`, '');
+      const value = sourceNode.values[socketKey];
+      
+      return {
+        ...conn,
+        resolvedValue: value || `Connected from ${conn.fromNode}`
+      };
+    });
+  }, [graph.connections, graph.nodes]);
+
 
   return (
     <div
@@ -178,8 +194,8 @@ const ReactFlowCustomNodeComponent = memo(({ data, id, selected }: CustomNodePro
           <ArgumentRenderer 
             node={nodeData}
             sockets={nodeData.sockets}
-            connections={connections}
-            allNodes={allNodes}
+            connections={enrichedConnections}
+            allNodes={graph.nodes}
             onValueChange={onValueChange}
             onRepeatableChange={onRepeatableChange}
           />

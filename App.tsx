@@ -64,6 +64,7 @@ const generateSignature = (cmd: any): string => {
 const App = () => {
   const [definitions, setDefinitions] = useState<any[]>([]);
   const [graph, setGraph] = useState<Graph>({ nodes: [], connections: [] });
+  const [debouncedGraph, setDebouncedGraph] = useState<Graph>(graph);
   const [generatedCode, setGeneratedCode] = useState('');
   const [loading, setLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState({ loaded: 0, total: 0 });
@@ -111,11 +112,21 @@ const App = () => {
     };
     loadData();
   }, []);
+  
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedGraph(graph);
+    }, 300);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [graph]);
 
   useEffect(() => {
-    const code = codeGenerator.generate(graph);
+    const code = codeGenerator.generate(debouncedGraph);
     setGeneratedCode(code);
-  }, [graph]);
+  }, [debouncedGraph]);
 
   const handleDragStart = (e: React.DragEvent, type: string) => {
     e.dataTransfer.setData('application/tpc-node-editor', type);
