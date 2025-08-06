@@ -10,6 +10,8 @@ import {
   EdgeLabelRenderer,
   BaseEdge,
 } from '@xyflow/react';
+import { X } from 'lucide-react';
+
 
 export const CustomEdge = ({
   id,
@@ -95,9 +97,8 @@ export const CustomEdge = ({
       />
       {/* A wider, invisible path for easier hovering */}
       <path
-        className="react-flow__edge-path"
+        className="react-flow__edge-path edge-hover-path"
         d={edgePath}
-        style={{ stroke: 'transparent', strokeWidth: 20, pointerEvents: 'stroke' }}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
       />
@@ -105,34 +106,20 @@ export const CustomEdge = ({
         {showButton && (
           <div
             style={{
-              position: 'absolute',
               transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
-              pointerEvents: 'all',
               zIndex: displayZIndex,
             }}
-            className="nodrag nopan"
+            className="nodrag nopan edge-label"
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
           >
             <button
-              style={{
-                  width: '20px',
-                  height: '20px',
-                  background: '#c0392b',
-                  border: 'none',
-                  cursor: 'pointer',
-                  borderRadius: '50%',
-                  fontSize: '12px',
-                  color: 'white',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 2px 4px rgba(0,0,0,0.3)',
-              }}
+              className="edge-delete-button"
               onClick={onEdgeClick}
               title="Delete connection"
+              aria-label="Delete connection"
             >
-              ✕
+              <X size={12} />
             </button>
           </div>
         )}

@@ -1,4 +1,3 @@
-
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -41,6 +40,7 @@ interface ReactFlowGraphEditorProps {
   setGraph: React.Dispatch<React.SetStateAction<Graph>>;
   onValueChange: (nodeId: string, key: string, value: any) => void;
   onToggleExpansion: (nodeId: string) => void;
+  onToggleVisibility: (nodeId: string) => void;
   onRepeatableChange: (nodeId: string, listKey: string, action: 'add' | 'remove') => void;
   onDelete: (nodeId: string) => void;
 }
@@ -58,6 +58,7 @@ const ReactFlowComponent = ({
   setGraph,
   onValueChange,
   onToggleExpansion,
+  onToggleVisibility,
   onRepeatableChange,
   onDelete,
 }: ReactFlowGraphEditorProps) => {
@@ -130,6 +131,7 @@ const ReactFlowComponent = ({
           nodeData: updatedNode,
           onValueChange,
           onToggleExpansion,
+          onToggleVisibility,
           onRepeatableChange,
           onDelete: handleDeleteNode,
         },
@@ -137,7 +139,7 @@ const ReactFlowComponent = ({
         draggable: true,
       };
     });
-  }, [onValueChange, onToggleExpansion, onRepeatableChange, handleDeleteNode]);
+  }, [onValueChange, onToggleExpansion, onToggleVisibility, onRepeatableChange, handleDeleteNode]);
 
   const convertToReactFlowEdges = useCallback((connections: CustomConnection[]): Edge[] => {
     return connections.map((conn) => {
@@ -355,11 +357,7 @@ const ReactFlowComponent = ({
 
   return (
     <div 
-      style={{ 
-        width: '100%', 
-        height: '100%',
-        backgroundColor: '#1a1d21',
-      }} 
+      className="graph-editor-wrapper"
       onDrop={onDrop} 
       onDragOver={onDragOver}
     >
@@ -380,7 +378,7 @@ const ReactFlowComponent = ({
           elementsSelectable={true}
           minZoom={0.1}
           maxZoom={2}
-          style={{ background: '#1a1d21' }}
+          style={{ background: 'transparent' }}
           defaultEdgeOptions={{
             type: 'customEdge',
             style: { 
@@ -394,37 +392,18 @@ const ReactFlowComponent = ({
             gap={20} 
             size={1}
             color="#444"
-            style={{ opacity: 0.6 }}
           />
-          <Controls 
-            style={{
-              background: '#2c3035',
-              border: '1px solid #444',
-              borderRadius: '8px',
-            }}
-          />
+          <Controls />
           <MiniMap 
             nodeStrokeWidth={3}
             nodeColor={(node) => {
               if (node.type === 'customNode') return '#4a90e2';
               return '#2c3035';
             }}
-            style={{
-              backgroundColor: '#1a1d21',
-              border: '1px solid #444',
-              borderRadius: '8px',
-            }}
             maskColor="rgba(26, 29, 33, 0.8)"
           />
           <Panel position="top-left">
-            <div style={{ 
-              backgroundColor: 'var(--bg-color)', 
-              padding: '8px', 
-              borderRadius: '4px',
-              border: '1px solid var(--border-color)',
-              fontSize: '0.8em',
-              color: 'var(--text-color)'
-            }}>
+            <div className="info-panel">
               Nodes: {nodes.length} | Connections: {edges.length}
             </div>
           </Panel>

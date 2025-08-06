@@ -5,6 +5,7 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 import React, { useState, useMemo } from 'react';
+import { ChevronDown } from 'lucide-react';
 import { DATA_FILES } from '@/config';
 
 interface NodeLibraryProps {
@@ -35,16 +36,16 @@ export const NodeLibrary = ({ definitions, onDragStart, onClick }: NodeLibraryPr
     }, [definitions, searchTerm]);
 
     return (
-        <>
-            <h2 style={{ margin: '10px 0', fontSize: '1.2em' }}>Nodes</h2>
+        <div className="node-library">
+            <h2>Nodes</h2>
             <input 
                 type="text"
                 placeholder="Search nodes..."
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
-                style={{ width: '100%', padding: '8px', backgroundColor: 'var(--bg-color)', border: '1px solid var(--border-color)', borderRadius: '4px', color: 'var(--text-color)' }}
+                className="node-library-search"
             />
-            <div style={{ flex: 1, overflowY: 'auto' }}>
+            <div className="node-library-list">
                 {Object.entries(DATA_FILES).map(([category, files]) => {
                     const categoryNodes = filteredDefs.filter(def => {
                         const defCategoryPath = def.sourceFile.substring(0, def.sourceFile.lastIndexOf('/'));
@@ -59,18 +60,13 @@ export const NodeLibrary = ({ definitions, onDragStart, onClick }: NodeLibraryPr
                         <div key={category}>
                             <h3 
                                 onClick={() => toggleCategory(category)}
-                                style={{ 
-                                    marginTop: '20px', 
-                                    fontSize: '1em', 
-                                    color: 'var(--primary-color)', 
-                                    cursor: 'pointer',
-                                    userSelect: 'none',
-                                    display: 'flex',
-                                    alignItems: 'center'
-                                }}
+                                className="node-library-category"
+                                aria-expanded={!isCollapsed}
                             >
-                                <span style={{ marginRight: '8px', display: 'inline-block', transition: 'transform 0.2s ease-in-out', transform: isCollapsed ? 'rotate(-90deg)' : 'rotate(0deg)'}}>▼</span>
-                                {category.replace(/_/g, ' ')}
+                                <span className={`node-library-category-arrow ${isCollapsed ? 'collapsed' : ''}`}>
+                                    <ChevronDown size={16} />
+                                </span>
+                                <span>{category.replace(/_/g, ' ')}</span>
                             </h3>
                             {!isCollapsed && (
                                 <div>
@@ -81,9 +77,9 @@ export const NodeLibrary = ({ definitions, onDragStart, onClick }: NodeLibraryPr
                                             onDragStart={(e) => onDragStart(e, def.type)}
                                             onClick={(e) => onClick(e, def.type)}
                                             title={def.type}
-                                            style={{ padding: '10px', backgroundColor: 'var(--bg-color-lighter)', borderRadius: '4px', marginBottom: '8px', cursor: 'pointer', userSelect: 'none', borderLeft: '3px solid var(--primary-color)' }}>
-                                            <div style={{ fontWeight: '500' }}>{def.displayName}</div>
-                                            <div style={{ fontSize: '0.8em', fontFamily: 'var(--font-mono)', opacity: 0.7, marginTop: '4px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                            className="node-library-item">
+                                            <div className="node-library-item-name">{def.displayName}</div>
+                                            <div className="node-library-item-sig">
                                                 {def.signature}
                                             </div>
                                         </div>
@@ -94,6 +90,6 @@ export const NodeLibrary = ({ definitions, onDragStart, onClick }: NodeLibraryPr
                     );
                 })}
             </div>
-        </>
+        </div>
     );
 };

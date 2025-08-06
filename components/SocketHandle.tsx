@@ -5,14 +5,13 @@
 import React from 'react';
 import { Handle, Position, HandleProps } from '@xyflow/react';
 import { SocketDef } from '@/types';
-import { SOCKET_COLORS } from '@/config';
 
 interface SocketHandleProps {
   socket: SocketDef;
   isMainExec?: boolean;
 }
 
-export const SocketHandle: React.FC<SocketHandleProps & Omit<HandleProps, 'id'|'type'|'position'>> = ({ socket, isMainExec = false, style, ...rest }) => {
+export const SocketHandle: React.FC<SocketHandleProps & Omit<HandleProps, 'id'|'type'|'position'>> = ({ socket, isMainExec = false, style, className, ...rest }) => {
   const isInput = socket.io === 'input';
   let handleId = socket.id.replace(`${socket.nodeId}-`, '');
 
@@ -22,47 +21,46 @@ export const SocketHandle: React.FC<SocketHandleProps & Omit<HandleProps, 'id'|'
 
   const handleIdWithDirection = isInput ? `${handleId}_in` : `${handleId}_out`;
   const position = isInput ? Position.Left : Position.Right;
-  const socketColor = socket.type === 'exec' ? SOCKET_COLORS.Exec : (SOCKET_COLORS[socket.dataType] || SOCKET_COLORS.Default);
-
-  const baseStyle: React.CSSProperties = {
-    width: '12px',
-    height: '12px',
-    border: '2px solid var(--bg-color-lighter)',
-    backgroundColor: socketColor,
-    cursor: 'crosshair',
-  };
-
-  const execBaseTransform = 'rotate(45deg)';
-  const execStyle: React.CSSProperties = {
-    ...baseStyle,
-    width: '14px',
-    height: '14px',
-    borderRadius: '0px',
-  };
-
-  const dataStyle: React.CSSProperties = {
-    ...baseStyle,
-    borderRadius: '50%',
-  };
   
-  const { transform: parentTransform, ...restOfStyle } = style || {};
-
-  const finalTransform = [
-    ...(socket.type === 'exec' ? [execBaseTransform] : []),
-    ...(parentTransform ? [parentTransform] : [])
+  const handleClassName = [
+    'socket-handle',
+    socket.type, // 'exec' or 'data'
+    socket.io, // 'input' or 'output'
+    className || '',
+    isMainExec ? 'main-exec' : ''
   ].join(' ').trim();
   
-  const finalStyle = {
-      ...(socket.type === 'exec' ? execStyle : dataStyle),
-      ...restOfStyle,
-      ...(finalTransform ? { transform: finalTransform } : {})
+  const dataTypeForColor = (socket.type === 'exec' ? 'Exec' : (socket.dataType || 'Default')).replace('..', '--');
+
+  const finalStyle: React.CSSProperties = {
+      backgroundColor: `var(--socket-color-${dataTypeForColor})`,
+      ...style
   };
+
+  if (socket.type === 'exec') {
+    if (isMainExec) {
+      // Main exec sockets are positioned close to the node body, consistent with data sockets.
+      if (isInput) {
+        finalStyle.left = '-8px';
+      } else {
+        finalStyle.right = '-8px';
+      }
+    } else {
+      // Nested exec sockets are positioned further out.
+      if (isInput) {
+        finalStyle.left = '-24px';
+      } else {
+        finalStyle.right = '-21px';
+      }
+    }
+  }
 
   return (
     <Handle
       id={handleIdWithDirection}
       type={isInput ? 'target' : 'source'}
       position={position}
+      className={handleClassName}
       style={finalStyle}
       {...rest}
     />

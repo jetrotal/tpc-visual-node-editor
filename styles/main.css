@@ -1,0 +1,152 @@
+:root {
+  --bg-color: #1a1b1e;
+  --bg-color-light: #242528;
+  --bg-color-lighter: #313338;
+  --bg-color-lightest: #41444a;
+  --bg-color-disabled: #2a2d31;
+  --text-color: #e2e2e2;
+  --text-color-dark: #a0a3a8;
+  --text-color-darker: #7d8085;
+  --primary-color: #5865f2;
+  --primary-color-dark: #4752c4;
+  --primary-color-light: #707bf3;
+  --danger-color: #f23f42;
+  --danger-color-dark: #d83639;
+  --success-color: #2dc770;
+  --border-color: #313338;
+  --border-color-light: #44474e;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'Roboto Mono', monospace;
+  --shadow: 0 1px 3px rgba(0,0,0,0.2);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,0.3);
+  --shadow-inset: inset 0 1px 2px rgba(0,0,0,0.2);
+  --border-radius-sm: 4px;
+  --border-radius-md: 6px;
+  --border-radius-lg: 8px;
+
+  /* Socket Colors */
+  --socket-color-Exec: #ffffff;
+  --socket-color-String: #57f287;
+  --socket-color-Numeric: #3498db;
+  --socket-color-Variable: #9b59b6;
+  --socket-color-Condition: #f1c40f;
+  --socket-color-Default: #e67e22;
+  --socket-color-Expression: var(--socket-color-Default);
+  --socket-color-Value: var(--socket-color-Default);
+  --socket-color-Numeric--Numeric: var(--socket-color-Numeric);
+  --socket-color-Switch: var(--socket-color-Variable);
+  --socket-color-RawCode: var(--danger-color);
+  --socket-color-JSCode: var(--success-color);
+}
+
+/* Base & Global Styles */
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow: hidden;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Utility Classes */
+.button {
+  cursor: pointer;
+  border-radius: var(--border-radius-sm);
+  border: none;
+  font-weight: 500;
+  padding: 8px 12px;
+  color: white;
+  background: var(--bg-color-lighter);
+  transition: all 0.15s ease;
+}
+.button:hover {
+  background: var(--bg-color-lightest);
+}
+.button-primary {
+  background: var(--primary-color);
+}
+.button-primary:hover {
+  background: var(--primary-color-dark);
+}
+.button-danger {
+  background: var(--danger-color);
+}
+.button-danger:hover {
+  background: var(--danger-color-dark);
+}
+.button-small {
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.input-base {
+  width: 100%;
+  padding: 8px 10px;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  color: var(--text-color);
+  display: block;
+  transition: border-color 0.15s ease;
+}
+.input-base:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+.input-base[data-prefix] {
+  padding-left: 24px;
+}
+.input-base:disabled {
+  background-color: var(--bg-color-disabled);
+  cursor: not-allowed;
+  color: var(--text-color-dark);
+  font-style: italic;
+}
+textarea.input-base {
+  resize: none;
+  overflow-y: hidden;
+  min-height: 34px;
+  font-family: var(--font-mono);
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+select.input-base {
+  padding: 7px 10px;
+}
+.flex-1 {
+  flex: 1;
+}
+.abs-center-y {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+/* App Layout */
+.app-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+}

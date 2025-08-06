@@ -87,6 +87,8 @@ function _walk<T>(
         case 'Expression':
         case 'Value':
         case 'Numeric..Numeric':
+        case 'RawCode':
+        case 'JSCode':
             return handlers.onPrimitive ? handlers.onPrimitive(context) : null;
         
         case 'assignment':

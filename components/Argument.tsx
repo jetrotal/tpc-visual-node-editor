@@ -3,10 +3,12 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 import React, { useCallback } from 'react';
+import { Plus, Minus } from 'lucide-react';
 import { NodeInstance, SocketDef, Connection } from '@/types';
 import { getIdentifier } from '@/engine/nodeFactory';
 import { argumentWalker, WalkerHandlers } from '@/engine/argumentWalker';
 import { SocketHandle } from '@/components/SocketHandle';
+import { ManagedInput } from './ManagedInput';
 
 interface ArgumentRendererProps {
     node: NodeInstance;
@@ -16,60 +18,6 @@ interface ArgumentRendererProps {
     onValueChange: (nodeId: string, key: string, value: any) => void;
     onRepeatableChange: (nodeId: string, listKey: string, action: 'add' | 'remove') => void;
 }
-
-// Helper to render the actual input controls
-const renderInputControl = (
-    key: string,
-    arg: any,
-    node: NodeInstance,
-    onValueChange: ArgumentRendererProps['onValueChange'],
-    connection?: Connection,
-    allNodes?: NodeInstance[]
-) => {
-    const isConnected = !!connection;
-    const style: React.CSSProperties = {width: '100%', padding:'6px', backgroundColor: 'var(--bg-color)', border:'1px solid var(--border-color)', borderRadius:'3px', color:'var(--text-color)', display: 'block'};
-
-    if (arg.prefix) {
-        style.paddingLeft = '20px';
-    }
-
-    if (isConnected && connection) {
-        const sourceNode = allNodes?.find(n => n.id === connection.fromNode);
-        const socketKey = connection.fromSocket.replace(`${connection.fromNode}-`, '');
-        const connectedValue = sourceNode?.values[socketKey] || `Connected from ${connection.fromNode}`;
-        
-        const disabledStyle: React.CSSProperties = {...style, backgroundColor: '#2a2d31', opacity: 0.9, cursor: 'not-allowed', color: '#9ca3af', fontStyle: 'italic'};
-        return <input type="text" value={connectedValue} disabled style={disabledStyle} title={`Connected from ${connection.fromNode}`} />;
-    }
-
-    const handleTextareaInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        onValueChange(node.id, key, e.target.value);
-        e.target.style.height = 'auto';
-        e.target.style.height = `${e.target.scrollHeight}px`;
-    };
-    const onTextareaFocus = (e: React.FocusEvent<HTMLTextAreaElement>) => {
-        e.target.style.height = 'auto';
-        e.target.style.height = `${e.target.scrollHeight}px`;
-    };
-    const textareaStyle: React.CSSProperties = {...style, resize: 'none', overflowY: 'hidden', minHeight: '28px', fontFamily: 'var(--font-mono)', paddingTop: '8px', paddingBottom: '8px' };
-    const placeholder = arg.label || arg.name || arg.type;
-
-    switch(arg.type) {
-        case 'String':
-        case 'Condition':
-        case 'Expression':
-        case 'Value':
-             return <textarea rows={1} value={node.values[key] ?? ''} onChange={handleTextareaInput} onFocus={onTextareaFocus} placeholder={placeholder} style={textareaStyle}/>;
-        case 'Variable':
-        case 'Switch':
-             return <input type='text' value={node.values[key] ?? ''} onChange={(e) => onValueChange(node.id, key, e.target.value)} placeholder={placeholder} style={style}/>;
-        case 'Numeric':
-            return <input type='number' value={node.values[key] ?? ''} onChange={(e) => onValueChange(node.id, key, e.target.value)} placeholder={placeholder} style={style}/>;
-        case 'Numeric..Numeric':
-             return <input type='text' value={node.values[key] ?? ''} onChange={(e) => onValueChange(node.id, key, e.target.value)} placeholder="e.g. 1..5" style={style}/>;
-        default: return null;
-    }
-};
 
 export function ArgumentRenderer(props: ArgumentRendererProps) {
     const { node, sockets, connections, allNodes, onValueChange, onRepeatableChange } = props;
@@ -86,19 +34,18 @@ export function ArgumentRenderer(props: ArgumentRendererProps) {
             }
             
             return (
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', marginTop: '4px' }}>
+                <div className="argument-optional-group">
                     <input
                         type="checkbox"
                         id={enabledKey}
                         checked={isEnabled}
                         onChange={e => onValueChange(node.id, enabledKey, e.target.checked)}
-                        style={{ marginTop: '4px' }}
                     />
-                    <div style={{ flex: 1 }}>
-                        <label htmlFor={enabledKey} style={{ cursor: 'pointer', fontSize: '0.85em', fontWeight: 500 }}>
+                    <div className="flex-1">
+                        <label htmlFor={enabledKey} className="argument-optional-label">
                             {labelText}
                         </label>
-                        <div style={{ opacity: isEnabled ? 1 : 0.6, pointerEvents: isEnabled ? 'all' : 'none', paddingTop: '4px' }}>
+                        <div className={`argument-optional-content ${isEnabled ? '' : 'disabled'}`}>
                             {isEnabled && content}
                         </div>
                     </div>
@@ -108,16 +55,22 @@ export function ArgumentRenderer(props: ArgumentRendererProps) {
         onRepeatable: ({ arg, key }, items, count) => {
             const name = getIdentifier(arg);
             return (
-                <div style={{borderLeft: '2px solid #555', paddingLeft: '10px', display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'stretch'}}>
-                    <div style={{fontWeight: 'bold', fontSize: '0.85em', color: 'var(--primary-color)'}}>{name}</div>
+                <div className="argument-repeatable-group">
+                    <div className="argument-repeatable-title">{name}</div>
                     {items.map((item, i) => (
-                        <div key={i} style={{border: '0px solid var(--border-color)', borderRadius: '4px', padding: '8px'}}>
+                        <div key={i} className="argument-repeatable-item">
                            {item}
                         </div>
                     ))}
-                     <div style={{display: 'flex', gap: '5px', marginTop: '5px'}}>
-                        <button onClick={() => onRepeatableChange(node.id, key, 'add')} style={{flex: 1, cursor: 'pointer'}} >➕ Add {name}</button>
-                        {count > 0 && <button onClick={() => onRepeatableChange(node.id, key, 'remove')} style={{flex: 1, cursor: 'pointer'}}>➖ Remove</button>}
+                     <div className="argument-repeatable-controls">
+                        <button className="button button-primary" onClick={() => onRepeatableChange(node.id, key, 'add')}>
+                            <Plus size={14} /> Add {name}
+                        </button>
+                        {count > 0 && 
+                            <button className="button button-danger" onClick={() => onRepeatableChange(node.id, key, 'remove')}>
+                                <Minus size={14} /> Remove
+                            </button>
+                        }
                     </div>
                 </div>
             );
@@ -128,22 +81,58 @@ export function ArgumentRenderer(props: ArgumentRendererProps) {
             
             const inputSocketDef = sockets.inputs.find(s => s.id === socketId);
             const outputSocketDef = sockets.outputs.find(s => s.id === socketId);
-            
-            const handleStyle: React.CSSProperties = { position: 'absolute', top: '50%', transform: 'translateY(-50%)' };
+            const isConnected = !!connection;
+
+            const renderManagedInput = () => {
+                const placeholder = arg.label || arg.name || arg.type;
+                let inputType: 'text' | 'number' | 'textarea' = 'text';
+
+                switch(arg.type) {
+                    case 'String':
+                    case 'Condition':
+                    case 'Expression':
+                    case 'Value':
+                    case 'RawCode':
+                    case 'JSCode':
+                        inputType = 'textarea';
+                        break;
+                    case 'Numeric':
+                        inputType = 'number';
+                        break;
+                    case 'Numeric..Numeric':
+                    case 'Variable':
+                    case 'Switch':
+                        inputType = 'text';
+                        break;
+                    default: return null;
+                }
+
+                return <ManagedInput
+                    initialValue={node.values[key] ?? ''}
+                    onCommit={(value) => onValueChange(node.id, key, value)}
+                    type={inputType}
+                    placeholder={placeholder}
+                    inputProps={{ 'data-prefix': !!arg.prefix }}
+                />
+            };
 
             return (
-                 <div style={{ display: 'flex', alignItems: 'center', width: '100%', gap: '8px', position: 'relative' }}>
-                    {inputSocketDef && <SocketHandle socket={inputSocketDef} style={{...handleStyle, left: '-18px' }} />}
-                    <span style={{ fontSize: '0.8em', fontFamily: 'var(--font-mono)', minWidth: '60px' }}>{arg.label || arg.name || arg.originalType || arg.type}</span>
-                    <div style={{ flex: 1, position: 'relative' }}>
+                 <div className="argument-primitive">
+                    {inputSocketDef && <SocketHandle key={`${inputSocketDef.id}-in`} socket={inputSocketDef} className="abs-center-y" />}
+                    <span className="argument-primitive-label">{arg.label || arg.name || arg.originalType || arg.type}</span>
+                    <div className="argument-primitive-input-wrapper">
                         {arg.prefix && (
-                            <span style={{ position: 'absolute', left: '8px', top: '50%', transform: 'translateY(-50%)', zIndex: 1, color: '#aaa', pointerEvents: 'none' }}>
+                            <span className="argument-input-prefix">
                                 {arg.prefix}
                             </span>
                         )}
-                        {renderInputControl(key, arg, node, onValueChange, connection, allNodes)}
+                        {isConnected ? (
+                             <input type="text" value={connection.resolvedValue ?? ''} disabled className="input-base" title={`Connected from ${connection.fromNode}`} />
+                        ) : (
+                            renderManagedInput()
+                        )}
                     </div>
-                    {outputSocketDef && <SocketHandle socket={outputSocketDef} style={{...handleStyle, right: '-18px' }} />}
+                    {outputSocketDef && <SocketHandle key={`${outputSocketDef.id}-out`} socket={outputSocketDef} className="abs-center-y" />}
                 </div>
             );
         },
@@ -162,9 +151,9 @@ export function ArgumentRenderer(props: ArgumentRendererProps) {
             
             return (
                 <div>
-                    <div style={{display: 'flex', alignItems: 'center', gap: '5px'}}>
-                        {choiceLabel && <label style={{fontSize: '0.8em'}}>{choiceLabel}</label>}
-                        <select value={selectedValue} onChange={(e) => onValueChange(node.id, key, e.target.value)} style={{flex: 1, padding:'6px', backgroundColor: 'var(--bg-color)', border:'1px solid var(--border-color)', borderRadius:'3px', color:'var(--text-color)'}}>
+                    <div className="argument-choice-group">
+                        {choiceLabel && <label>{choiceLabel}</label>}
+                        <select value={selectedValue} onChange={(e) => onValueChange(node.id, key, e.target.value)} className="input-base">
                             {isOptional && <option value="__none__">None</option>}
                             {arg.options?.map((opt:any, i:number) => {
                                 const identifier = getIdentifier(opt);
@@ -174,7 +163,7 @@ export function ArgumentRenderer(props: ArgumentRendererProps) {
                         </select>
                     </div>
                     {childResult && (
-                        <div style={{paddingTop: '5px', marginLeft: '10px'}}>
+                        <div className="argument-choice-child">
                              {childResult}
                         </div>
                     )}
@@ -182,7 +171,7 @@ export function ArgumentRenderer(props: ArgumentRendererProps) {
             );
         },
         onBlock: ({}, childResults) => (
-             <div style={{borderLeft: '2px solid var(--border-color)', paddingLeft: '10px', marginLeft: '6px', marginTop: '5px', display: 'flex', flexDirection: 'column', gap: '8px'}}>
+             <div className="argument-block">
                 {childResults}
             </div>
         ),
@@ -190,26 +179,25 @@ export function ArgumentRenderer(props: ArgumentRendererProps) {
             const socketId = `${node.id}-${key}`;
             const inputSocketDef: SocketDef = { id: socketId, name: key, label: 'do', io: 'input', type: 'exec', dataType: 'Exec', nodeId: node.id };
             const outputSocketDef: SocketDef = { ...inputSocketDef, io: 'output' };
-            const handleStyle: React.CSSProperties = { position: 'absolute', top: '50%', transform: 'translateY(-50%)' };
 
             return (
-                <div style={{ display: 'flex', alignItems: 'center', width: '100%', gap: '8px', position: 'relative', padding: '4px 0' }}>
-                    <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        <SocketHandle socket={inputSocketDef} style={{...handleStyle, left: '-18px' }} />
-                        <span style={{ fontSize: '0.75em', fontFamily: 'var(--font-mono)', color: '#ffffff', marginLeft: '8px' }}>in</span>
+                <div className="argument-exec-block">
+                    <div className="handle-wrapper">
+                        <SocketHandle socket={inputSocketDef} className="abs-center-y" />
+                        <span className="label in">in</span>
                     </div>
-                    <div style={{ flex: 1, height: '1px', backgroundColor: '#444', margin: '0 8px' }} />
-                    <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        <span style={{ fontSize: '0.75em', fontFamily: 'var(--font-mono)', color: '#ffffff', marginRight: '8px' }}>out</span>
-                        <SocketHandle socket={outputSocketDef} style={{...handleStyle, right: '-18px' }} />
+                    <div className="divider" />
+                    <div className="handle-wrapper">
+                        <span className="label out">out</span>
+                        <SocketHandle socket={outputSocketDef} className="abs-center-y" />
                     </div>
                 </div>
             );
         },
         onSubcommand: ({ arg }, childResults) => (
-            <div style={{borderLeft: '2px solid var(--primary-color)', margin: '4px 0', paddingLeft: '8px', display: 'flex', flexDirection: 'column', gap: '8px'}}>
-                <div style={{display: 'flex', gap: '4px', alignItems: 'center'}}>
-                    <label style={{fontSize: '0.9em', opacity: 0.9, fontWeight: '500'}}>{arg.name}</label>
+            <div className="argument-subcommand">
+                <div className="argument-subcommand-header">
+                    <label>{arg.name}</label>
                     {/* Render array_parameter first if it exists */}
                     {arg.array_parameter && childResults[0]}
                 </div>
@@ -227,32 +215,38 @@ export function ArgumentRenderer(props: ArgumentRendererProps) {
             const count = items.length;
 
             return (
-                <div style={{borderLeft: '2px solid #555', paddingLeft: '10px', display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'stretch'}}>
-                    <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
-                        <span style={{fontWeight: 'bold', fontSize: '1.2em'}}>{startDelim}</span>
-                        <span style={{fontWeight: 'bold', fontSize: '0.85em', color: 'var(--primary-color)'}}>{label}</span>
-                        <span style={{fontWeight: 'bold', fontSize: '1.2em'}}>{endDelim}</span>
+                <div className="argument-array-group">
+                    <div className="argument-array-title">
+                        <span className="delim">{startDelim}</span>
+                        <span>{label}</span>
+                        <span className="delim">{endDelim}</span>
                     </div>
                     {items.map((item, i) => (
-                        <div key={i} style={{border: '1px solid var(--border-color)', borderRadius: '4px', padding: '8px'}}>
+                        <div key={i} className="argument-array-item">
                             {item}
                         </div>
                     ))}
-                    <div style={{display: 'flex', gap: '5px', marginTop: '5px'}}>
-                        <button onClick={() => onRepeatableChange(node.id, key, 'add')} style={{flex: 1, cursor: 'pointer'}} >➕ Add {label}</button>
-                        {count > 0 && <button onClick={() => onRepeatableChange(node.id, key, 'remove')} style={{flex: 1, cursor: 'pointer'}}>➖ Remove</button>}
+                    <div className="argument-array-controls">
+                        <button className="button button-primary" onClick={() => onRepeatableChange(node.id, key, 'add')}>
+                            <Plus size={14} /> Add {label}
+                        </button>
+                        {count > 0 && 
+                            <button className="button button-danger" onClick={() => onRepeatableChange(node.id, key, 'remove')}>
+                                <Minus size={14} /> Remove
+                            </button>
+                        }
                     </div>
                 </div>
             );
         },
         onBase: ({ arg }, arrayParamResult) => (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <span style={{fontWeight: 500}}>{arg.name}</span>
+            <div className="argument-base-group">
+                <span className="name">{arg.name}</span>
                 {arg.array_parameter && (
                     <>
-                        <span style={{fontSize: '1.2em'}}>[</span>
-                        <div style={{flex: 1}}>{arrayParamResult}</div>
-                        <span style={{fontSize: '1.2em'}}>]</span>
+                        <span className="delim">[</span>
+                        <div className="array-param-wrapper">{arrayParamResult}</div>
+                        <span className="delim">]</span>
                     </>
                 )}
             </div>

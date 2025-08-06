@@ -27,6 +27,7 @@ export interface NodeInstance {
   };
   values: Record<string, any>;
   isExpanded: boolean;
+  isVisible: boolean;
 }
 
 export interface Connection {

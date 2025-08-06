@@ -1,4 +1,3 @@
-
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -6,7 +5,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Preloader from './components/Preloader';
 import { DATA_FILES } from '@/config';
-import { Graph } from '@/types';
+import { Graph, NodeInstance, Connection } from '@/types';
 import { nodeFactory } from '@/engine/nodeFactory';
 import { codeGenerator } from '@/engine/codeGenerator';
 
@@ -64,7 +63,6 @@ const generateSignature = (cmd: any): string => {
 const App = () => {
   const [definitions, setDefinitions] = useState<any[]>([]);
   const [graph, setGraph] = useState<Graph>({ nodes: [], connections: [] });
-  const [debouncedGraph, setDebouncedGraph] = useState<Graph>(graph);
   const [generatedCode, setGeneratedCode] = useState('');
   const [loading, setLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState({ loaded: 0, total: 0 });
@@ -112,21 +110,107 @@ const App = () => {
     };
     loadData();
   }, []);
-  
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedGraph(graph);
-    }, 300);
 
-    return () => {
-      clearTimeout(handler);
-    };
+  useEffect(() => {
+    const code = codeGenerator.generate(graph);
+    setGeneratedCode(code);
   }, [graph]);
 
+  // This handles the real-time evaluation of special nodes like 'Evaluate JS Code'
   useEffect(() => {
-    const code = codeGenerator.generate(debouncedGraph);
-    setGeneratedCode(code);
-  }, [debouncedGraph]);
+    // Prevent evaluation during load or on an empty graph
+    if (loading || graph.nodes.length === 0) return;
+
+    const nodeMap = new Map(graph.nodes.map(n => [n.id, n]));
+    const connectionsTo = new Map<string, Connection>();
+    graph.connections.forEach(c => connectionsTo.set(c.toSocket, c));
+
+    const getSocketValue = (node: NodeInstance, valueKey: string): any => {
+        const socketId = `${node.id}-${valueKey}`;
+        const connection = connectionsTo.get(socketId);
+        if (connection) {
+            const sourceNode = nodeMap.get(connection.fromNode);
+            if (sourceNode) {
+                const sourceSocketKey = connection.fromSocket.replace(`${connection.fromNode}-`, '');
+                if (sourceNode.definition.nodeDef.command === 'Evaluate JS Code') {
+                    return sourceNode.values[`${sourceSocketKey}_result`];
+                }
+                return getSocketValue(sourceNode, sourceSocketKey);
+            }
+        }
+        return node.values[valueKey];
+    };
+
+    let needsUpdate = false;
+    const newNodes = graph.nodes.map(n => {
+        if (n.definition.nodeDef.command !== 'Evaluate JS Code') {
+            return n;
+        }
+        
+        const newNode = { ...n, values: { ...n.values } };
+        const args = newNode.definition.nodeDef.arguments;
+
+        const codeArgIndex = args.findIndex((a: any) => a.type === 'JSCode');
+        if (codeArgIndex === -1) return n;
+        const codeArg = args[codeArgIndex];
+
+        const codeKey = `${codeArgIndex}_${codeArg.name}`;
+        const resultKey = `${codeKey}_result`;
+        const code = getSocketValue(newNode, codeKey);
+
+        if (code === undefined || code === null || String(code).trim() === '') {
+            if (newNode.values[resultKey] !== '') {
+                newNode.values[resultKey] = '';
+                needsUpdate = true;
+            }
+            return newNode;
+        }
+
+        // Collect variables
+        const variables: { [key: string]: any } = {};
+        const varGroupArgIndex = args.findIndex((a: any) => a.name === 'variable');
+
+        if (varGroupArgIndex !== -1) {
+            const varGroupArg = args[varGroupArgIndex];
+            const varGroupKey = `${varGroupArgIndex}_${varGroupArg.name}`;
+            const varCount = getSocketValue(newNode, `${varGroupKey}_count`) || 0;
+            for (let i = 0; i < varCount; i++) {
+                // name is at index 0, value is at index 1 within the group's content array.
+                const nameKey = `${varGroupKey}_${i}_0_name`;
+                const valueKey = `${varGroupKey}_${i}_1_value`;
+
+                const varName = getSocketValue(newNode, nameKey);
+                if (varName) {
+                    const rawValue = getSocketValue(newNode, valueKey);
+                    const parsedValue = !isNaN(parseFloat(rawValue)) && isFinite(rawValue) ? parseFloat(rawValue) : rawValue;
+                    variables[varName] = parsedValue;
+                }
+            }
+        }
+        
+        let resultString = '';
+        try {
+            const varNames = Object.keys(variables);
+            const varValues = Object.values(variables);
+            const evaluator = new Function(...varNames, `return ${code}`);
+            const result = evaluator(...varValues);
+            resultString = String(result ?? '');
+        } catch (e) {
+            resultString = `/* Error: ${(e as Error).message.replace(/\s/g, ' ')} */`;
+        }
+
+        if (newNode.values[resultKey] !== resultString) {
+            newNode.values[resultKey] = resultString;
+            needsUpdate = true;
+        }
+        
+        return newNode;
+    });
+
+    if (needsUpdate) {
+        setGraph(g => ({ ...g, nodes: newNodes }));
+    }
+  }, [graph, loading]);
 
   const handleDragStart = (e: React.DragEvent, type: string) => {
     e.dataTransfer.setData('application/tpc-node-editor', type);
@@ -172,7 +256,12 @@ const App = () => {
   const handleValueChange = useCallback((nodeId: string, key: string, value: any) => {
     setGraph(g => ({
       ...g,
-      nodes: g.nodes.map(n => n.id === nodeId ? { ...n, values: {...n.values, [key]: value} } : n),
+      nodes: g.nodes.map(n => {
+        if (n.id === nodeId) {
+          return { ...n, values: {...n.values, [key]: value} };
+        }
+        return n;
+      }),
     }));
   }, [setGraph]);
 
@@ -211,6 +300,13 @@ const App = () => {
     }));
   }, [setGraph]);
 
+  const toggleNodeVisibility = useCallback((nodeId: string) => {
+    setGraph(g => ({
+      ...g,
+      nodes: g.nodes.map(n => n.id === nodeId ? { ...n, isVisible: !n.isVisible } : n)
+    }));
+  }, [setGraph]);
+
   const deleteNode = useCallback((nodeId: string) => {
     setGraph(g => {
       const newNodes = g.nodes.filter(n => n.id !== nodeId);
@@ -224,16 +320,17 @@ const App = () => {
   }
 
   return (
-    <div style={{ display: 'flex', width: '100%', height: '100%' }}>
+    <div className="app-container">
       <Sidebar width={250}>
         <NodeLibrary definitions={definitions} onDragStart={handleDragStart} onClick={(e, type) => handleNodeLibraryClick(type)} />
       </Sidebar>
-      <div style={{ flex: 1, display: 'flex' }}>
+      <div className="main-content">
         <ReactFlowGraphEditor 
           graph={graph} 
           setGraph={setGraph}
           onValueChange={handleValueChange}
           onToggleExpansion={toggleNodeExpansion}
+          onToggleVisibility={toggleNodeVisibility}
           onRepeatableChange={handleRepeatableChange}
           onDelete={deleteNode}
         />

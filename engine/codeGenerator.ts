@@ -4,6 +4,7 @@
 */
 import { Graph, NodeInstance, Connection } from '@/types';
 import { argumentWalker, WalkerHandlers } from './argumentWalker';
+import { getIdentifier } from './nodeFactory';
 
 export const codeGenerator = {
   generate(graph: Graph): string {
@@ -28,6 +29,12 @@ export const codeGenerator = {
             const sourceNode = nodeMap.get(connection.fromNode);
             if (sourceNode) {
                 const sourceSocketKey = connection.fromSocket.replace(`${connection.fromNode}-`, '');
+                
+                // For JSCode, the output value is stored with a `_result` suffix.
+                if (sourceNode.definition.nodeDef.command === 'Evaluate JS Code') {
+                  return sourceNode.values[`${sourceSocketKey}_result`];
+                }
+
                 return getSocketValue(sourceNode, sourceSocketKey);
             }
         }
@@ -37,24 +44,56 @@ export const codeGenerator = {
     const traverse = (node: NodeInstance | undefined, indent: string): string => {
         if (!node) return '';
 
-        let result = buildNodeCode(node, indent);
-
+        // First, get the code from the rest of the chain by traversing forward
         const execOutSocket = node.sockets.outputs.find(s => s.name === 'exec_out');
+        let nextCode = '';
         if (execOutSocket) {
             const execOutConns = connectionsFrom.get(execOutSocket.id);
             if (execOutConns && execOutConns.length > 0) {
                  const nextNode = nodeMap.get(execOutConns[0].toNode);
                  if (nextNode) {
-                    result += '\n' + traverse(nextNode, indent);
+                    nextCode = traverse(nextNode, indent);
                  }
             }
         }
-        return result;
+
+        // If the current node is hidden, just return the code from the rest of the chain
+        if (!node.isVisible) {
+            return nextCode;
+        }
+
+        // Otherwise, build the current node's code
+        const currentNodeCode = buildNodeCode(node, indent);
+        
+        // And join them, only adding a newline if both exist
+        if (currentNodeCode && nextCode) {
+            return `${currentNodeCode}\n${nextCode}`;
+        }
+        
+        // Return whichever one is not empty
+        return currentNodeCode || nextCode;
     };
 
     const codeGenHandlers = (indent: string): WalkerHandlers<string> => ({
-        onPrimitive: ({ arg, key, getValue }) => {
-            const val = getValue(key);
+        onPrimitive: ({ arg, key, node }) => {
+            if (arg.type === 'JSCode') {
+                // This node doesn't generate code by itself. Its value is exposed via its output socket.
+                if (node.definition.nodeDef.command === 'Evaluate JS Code') {
+                    return null;
+                }
+                
+                const jsCodeToRun = getSocketValue(node, key);
+                if (!jsCodeToRun) return null;
+                try {
+                    const result = new Function(`return ${jsCodeToRun}`)();
+                    return String(result ?? '');
+                } catch (e) {
+                    console.error("JS evaluation error:", e);
+                    return `/* Error evaluating JS: ${(e as Error).message.replace(/\s/g, ' ')} */`;
+                }
+            }
+            
+            const val = getSocketValue(node, key);
             if (arg.optional && (val === undefined || val === null || val === '')) return null;
             
             const finalVal = (val === undefined || val === null) ? '' : val;
@@ -66,9 +105,13 @@ export const codeGenerator = {
                 return String(finalVal);
             }
             if (arg.type === 'String') return `"${String(finalVal)}"`;
+            if (arg.type === 'RawCode') return String(finalVal);
             return String(finalVal);
         },
-        onKeyword: ({ arg }) => arg.value,
+        onKeyword: ({ arg }) => {
+            if (arg.value === '.hidden') return null; // Prevent '.hidden' from ever appearing in code
+            return arg.value;
+        },
         onChoice: (_, __, childResult) => childResult,
         onSubcommand: ({ arg }, childResults) => {
             let result = arg.name || '';
@@ -142,6 +185,10 @@ export const codeGenerator = {
     });
 
     const buildNodeCode = (node: NodeInstance, indent: string): string => {
+        if (node.definition.nodeDef.command === 'Evaluate JS Code') {
+            return '';
+        }
+        
         const def = node.definition.nodeDef;
         if (!def) return `${indent}// Error: Missing definition for node ${node.type}\n`;
 
@@ -184,6 +231,6 @@ export const codeGenerator = {
         !connections.some(c => c.toNode === n.id && c.toSocket.endsWith('-exec_in'))
     );
 
-    return startNodes.map(sn => traverse(sn, '')).join('\n\n');
+    return startNodes.map(sn => traverse(sn, '')).filter(Boolean).join('\n\n');
   }
 };

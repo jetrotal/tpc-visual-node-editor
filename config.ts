@@ -1,10 +1,14 @@
 
+
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
 */
 
 export const DATA_FILES: Record<string, string[]> = {
+  Utility: [
+    'data/Utility/utility_01_raw.json',
+  ],
   Directives: [
     'data/Directives/directive_01_operations.json',
     'data/Directives/directive_02_bin2text.json',

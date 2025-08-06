@@ -30,8 +30,9 @@ export const generateNodeSockets = (nodeInstance: NodeInstance): { inputs: Socke
   const isEventCommand = sourceFile && sourceFile.includes('/Event_Commands/');
   const isDirective = sourceFile && sourceFile.includes('/Directives/');
   const isMetaCommand = sourceFile && sourceFile.includes('/Meta_commands/');
+  const isUtilityCommand = sourceFile && sourceFile.includes('/Utility/');
 
-  if (isEventCommand || isDirective || isMetaCommand) {
+  if (isEventCommand || isDirective || isMetaCommand || isUtilityCommand) {
     allSockets.push({ id: `${nodeId}-exec_out`, name: 'exec_out', label: '▶', io: 'output', type: 'exec', dataType: 'Exec', nodeId });
     allSockets.push({ id: `${nodeId}-exec_in`, name: 'exec_in', label: '▶', io: 'input', type: 'exec', dataType: 'Exec', nodeId });
   }
@@ -40,6 +41,26 @@ export const generateNodeSockets = (nodeInstance: NodeInstance): { inputs: Socke
   const handlers: WalkerHandlers<SocketDef[]> = {
       onPrimitive: ({ arg, key }) => {
           const dataType = arg.type;
+
+          if (dataType === 'JSCode') {
+            const baseSocket = { id: `${nodeId}-${key}`, name: key, dataType, nodeId, type: 'data' as const };
+            // An input for the code itself, and an output for the evaluated result.
+            return [
+              { ...baseSocket, io: 'input', label: arg.label || arg.name || 'JS Code', dataType: 'Default' },
+              { ...baseSocket, io: 'output', label: 'Result', dataType: 'Default' },
+            ];
+          }
+
+          if (dataType === 'RawCode') {
+              const baseSocket = { id: `${nodeId}-${key}`, name: key, dataType, nodeId };
+              return [
+                  // The input socket can accept any data type, and will use the field label.
+                  {...baseSocket, io: 'input', type: 'data', dataType: 'Default', label: arg.label || arg.name || 'Input' },
+                  // The output socket provides the result as a string, and can connect anywhere.
+                  {...baseSocket, io: 'output', type: 'data', dataType: 'Default', label: 'Output' }
+              ];
+          }
+
           const baseSocket = { id: `${nodeId}-${key}`, name: key, label: arg.label || arg.name || arg.type, dataType, nodeId };
           return [
               {...baseSocket, io: 'input', type: 'data'},
@@ -53,13 +74,23 @@ export const generateNodeSockets = (nodeInstance: NodeInstance): { inputs: Socke
               {...baseSocket, io: 'input', type: 'exec'}
           ];
       },
+      onRepeatable: ({ arg }, items) => {
+        const allSockets = items.flat();
+        if (arg.type === 'RawCode') {
+            const inputs = allSockets.filter(s => s.io === 'input');
+            const outputs = allSockets.filter(s => s.io === 'output');
+            inputs.forEach((input, i) => input.label = `Code ${i + 1} In`);
+            outputs.forEach((output, i) => output.label = `Code ${i + 1} Out`);
+            return [...inputs, ...outputs];
+        }
+        return allSockets;
+    },
       // The rest of the handlers just combine children results
       onChoice: (_, __, childResult) => childResult || [],
       onSubcommand: (_, childResults) => childResults.flat(),
       onBlock: (_, childResults) => childResults.flat(),
       onGroup: (_, childResults) => childResults.flat(),
       onArray: (_, itemResults) => itemResults.flat(),
-      onRepeatable: (_, itemResults) => itemResults.flat(),
       onBase: (_, arrayParamResult) => arrayParamResult || []
   };
 
@@ -114,6 +145,8 @@ export const nodeFactory = {
             case 'Expression':
             case 'Value':
             case 'Numeric..Numeric':
+            case 'RawCode':
+            case 'JSCode':
                 if (defaultValues[currentKey] === undefined) defaultValues[currentKey] = '';
                 break;
             case 'keyword':
@@ -185,6 +218,7 @@ export const nodeFactory = {
       sockets: { inputs: [], outputs: [] }, // Temporary empty
       values: { ...def.defaultValues },
       isExpanded: !!hasComplexArgs,
+      isVisible: true,
     };
     
     // Now generate the real sockets for the instance

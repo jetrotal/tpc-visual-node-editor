@@ -1,0 +1,48 @@
+
+[
+    {
+        "command": "Generate Raw Code",
+        "template": "(RawCode)...",
+        "base": "",
+        "arguments": [
+            {
+                "type": "RawCode",
+                "name": "code",
+                "label": "Raw Code",
+                "repeatable": true,
+                "repeatable_joiner": " "
+            }
+        ]
+    },
+    {
+        "command": "Evaluate JS Code",
+        "template": "Evaluates JS with custom variables",
+        "base": "",
+        "arguments": [
+            {
+                "type": "group",
+                "name": "variable",
+                "label": "Variable",
+                "repeatable": true,
+                "content": [
+                    {
+                        "type": "String",
+                        "name": "name",
+                        "label": "Var Name",
+                        "is_identifier": true
+                    },
+                    {
+                        "type": "Value",
+                        "name": "value",
+                        "label": "Var Value"
+                    }
+                ]
+            },
+            {
+                "type": "JSCode",
+                "name": "code",
+                "label": "JS Code"
+            }
+        ]
+    }
+]
