@@ -319,6 +319,26 @@
     width: max-content;
 }
 
+/* New container styles */
+.handles-container-left, .handles-container-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 0; /* The container itself is invisible and takes no space */
+    pointer-events: none; /* Allows clicking through it */
+    z-index: 10; /* Ensures handles are on top */
+}
+.handles-container-left {
+    left: 0;
+}
+.handles-container-right {
+    right: 0;
+}
+.node-content-wrapper {
+    position: relative;
+}
+/* --- End new container styles */
+
 .custom-node.hidden {
     opacity: .5
 }
@@ -422,73 +442,53 @@
     color: var(--text-color-dark);
     font-family: var(--font-mono);
     font-size: 11px;
-    left: 20px;
     padding: 2px 6px;
     pointer-events: none;
     position: absolute;
-    right: 20px;
     text-align: center;
-    white-space: nowrap
+    white-space: nowrap;
+    width: calc(100% - 40px);
 }
 
+/* React Flow Handle component is positioned absolutely by the library. We style it. */
 .socket-handle {
-    background-color: var(--socket-color-Default);
     border: 2px solid var(--bg-color);
     box-sizing: border-box;
     cursor: crosshair;
     height: 16px;
-    position: absolute;
-    transition: transform .15s ease;
     width: 16px;
-    z-index: 2
+    transition: transform .15s ease;
+    z-index: 2;
+    pointer-events: all;
+    transform: translateY(-50%); /* Vertical centering */
 }
 
 .socket-handle.data {
     height: 14px;
-    width: 14px
-}
-
-.socket-handle.exec.input {
-    left: -6px
-}
-
-.socket-handle.exec.output {
-    right: -6px
-}
-
-.socket-handle:hover {
-    transform: scale(1.2)
-}
-
-.socket-handle.data {
-    border-radius: 50%
+    width: 14px;
+    border-radius: 50%;
 }
 
 .socket-handle.exec {
     border-radius: 3px;
     height: 14px;
-    transform: rotate(45deg);
-    width: 14px
+    width: 14px;
+    transform: translateY(-50%) rotate(45deg);
+    margin: 0 -8px;
 }
 
+.socket-handle:hover {
+    transform: translateY(-50%) scale(1.2);
+}
 .socket-handle:hover.exec {
-    transform: scale(1.2) rotate(45deg)
+    transform: translateY(-50%) scale(1.2) rotate(45deg);
 }
 
-.socket-handle.data.input {
-    left: -8px
-}
-
-.socket-handle.data.output {
-    right: -8px
-}
-
-.abs-center-y.socket-handle.exec {
-    transform: translateY(-50%) rotate(45deg)
-}
-
-.abs-center-y.socket-handle:hover.exec {
-    transform: translateY(-50%) scale(1.2) rotate(45deg)
+.socket-handle-placeholder {
+    display: inline-block;
+    height: 14px;
+    width: 0;
+    vertical-align: middle;
 }
 
 /* Menu Bar and Dropdowns */
@@ -671,4 +671,45 @@
 /* Specific font for textarea measurement */
 .measure-span-textarea {
     font-family: var(--font-mono);
+}
+
+
+/* Argument Layout Overhaul */
+.argument-row {
+    padding: 6px 8px;
+    border-radius: var(--border-radius-md);
+    margin: 2px 0;
+}
+
+/* Zebra Striping */
+.argument-block > .argument-row:nth-child(odd),
+.argument-subcommand > .argument-row:nth-child(odd),
+.argument-repeatable-group > .argument-repeatable-item:nth-child(odd),
+.argument-array-group > .argument-array-item:nth-child(odd) {
+    background-color: var(--bg-color-inset);
+}
+
+/* Cleaner Containers */
+.argument-subcommand,
+.argument-repeatable-group,
+.argument-array-group,
+.argument-block,
+.argument-optional-content {
+    background-color: transparent; /* Remove old inset background */
+    border-left: 2px solid var(--border-color);
+    padding: 4px 0 4px 10px;
+    margin: 6px 0;
+    gap: 2px;
+}
+
+.argument-repeatable-item,
+.argument-array-item {
+    padding: 6px 8px;
+    border-radius: var(--border-radius-md);
+    border: none;
+    margin: 2px 0;
+}
+
+.argument-subcommand-header {
+    padding: 0 6px 4px 0;
 }

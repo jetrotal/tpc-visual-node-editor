@@ -23,6 +23,7 @@
     --bg-color-lighter: #313338;
     --bg-color-lightest: #41444a;
     --bg-color-disabled: #2a2d31;
+    --bg-color-inset: #202225;
     --text-color: #e2e2e2;
     --text-color-dark: #a0a3a8;
     --text-color-darker: #7d8085;
@@ -286,12 +287,6 @@ select.input-base {
 
 .argument-choice-group select,.flex-1 {
     flex: 1
-}
-
-.abs-center-y {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%)
 }
 
 .app-container {

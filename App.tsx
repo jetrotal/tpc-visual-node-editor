@@ -156,98 +156,114 @@ const App = () => {
 
   // This handles the real-time evaluation of special nodes like 'Evaluate JS Code'
   useEffect(() => {
-    // Prevent evaluation during load or on an empty graph
-    if (loading || graph.nodes.length === 0) return;
+    if (loading || graph.nodes.length === 0) {
+      return;
+    }
 
-    const nodeMap = new Map(graph.nodes.map(n => [n.id, n]));
-    const connectionsTo = new Map<string, Connection>();
-    graph.connections.forEach(c => connectionsTo.set(c.toSocket, c));
+    const jsNodes = graph.nodes.filter(n => n.definition.nodeDef.command === 'Evaluate JS Code');
+    if (jsNodes.length === 0) {
+      return;
+    }
 
-    const getSocketValue = (node: NodeInstance, valueKey: string): any => {
+    const evaluateNodes = async () => {
+      const nodeMap = new Map(graph.nodes.map(n => [n.id, n]));
+      const connectionsTo = new Map<string, Connection>();
+      graph.connections.forEach(c => connectionsTo.set(c.toSocket, c));
+
+      const getSocketValue = (node: NodeInstance, valueKey: string): any => {
         const socketId = `${node.id}-${valueKey}`;
         const connection = connectionsTo.get(socketId);
         if (connection) {
-            const sourceNode = nodeMap.get(connection.fromNode);
-            if (sourceNode) {
-                const sourceSocketKey = connection.fromSocket.replace(`${connection.fromNode}-`, '');
-                if (sourceNode.definition.nodeDef.command === 'Evaluate JS Code') {
-                    return sourceNode.values[`${sourceSocketKey}_result`];
-                }
-                return getSocketValue(sourceNode, sourceSocketKey);
+          const sourceNode = nodeMap.get(connection.fromNode);
+          if (sourceNode) {
+            const sourceSocketKey = connection.fromSocket.replace(`${connection.fromNode}-`, '');
+            if (sourceNode.definition.nodeDef.command === 'Evaluate JS Code') {
+              return sourceNode.values[`${sourceSocketKey}_result`];
             }
+            return getSocketValue(sourceNode, sourceSocketKey);
+          }
         }
         return node.values[valueKey];
-    };
+      };
 
-    let needsUpdate = false;
-    const newNodes = graph.nodes.map(n => {
-        if (n.definition.nodeDef.command !== 'Evaluate JS Code') {
-            return n;
-        }
-        
-        const newNode = { ...n, values: { ...n.values } };
-        const args = newNode.definition.nodeDef.arguments;
+      let needsUpdate = false;
+      const updatedValues: { [nodeId: string]: { [valueKey: string]: any } } = {};
+
+      const evaluationPromises = jsNodes.map(async (n) => {
+        const args = n.definition.nodeDef.arguments;
 
         const codeArgIndex = args.findIndex((a: any) => a.type === 'JSCode');
-        if (codeArgIndex === -1) return n;
+        if (codeArgIndex === -1) return;
         const codeArg = args[codeArgIndex];
 
         const codeKey = `${codeArgIndex}_${codeArg.name}`;
         const resultKey = `${codeKey}_result`;
-        const code = getSocketValue(newNode, codeKey);
+        const code = getSocketValue(n, codeKey);
 
         if (code === undefined || code === null || String(code).trim() === '') {
-            if (newNode.values[resultKey] !== '') {
-                newNode.values[resultKey] = '';
-                needsUpdate = true;
-            }
-            return newNode;
+          if (n.values[resultKey] !== '') {
+            if (!updatedValues[n.id]) updatedValues[n.id] = {};
+            updatedValues[n.id][resultKey] = '';
+            needsUpdate = true;
+          }
+          return;
         }
 
-        // Collect variables
         const variables: { [key: string]: any } = {};
         const varGroupArgIndex = args.findIndex((a: any) => a.name === 'variable');
 
         if (varGroupArgIndex !== -1) {
-            const varGroupArg = args[varGroupArgIndex];
-            const varGroupKey = `${varGroupArgIndex}_${varGroupArg.name}`;
-            const varCount = getSocketValue(newNode, `${varGroupKey}_count`) || 0;
-            for (let i = 0; i < varCount; i++) {
-                // name is at index 0, value is at index 1 within the group's content array.
-                const nameKey = `${varGroupKey}_${i}_0_name`;
-                const valueKey = `${varGroupKey}_${i}_1_value`;
+          const varGroupArg = args[varGroupArgIndex];
+          const varGroupKey = `${varGroupArgIndex}_${varGroupArg.name}`;
+          const varCount = getSocketValue(n, `${varGroupKey}_count`) || 0;
+          for (let i = 0; i < varCount; i++) {
+            const nameKey = `${varGroupKey}_${i}_0_name`;
+            const valueKey = `${varGroupKey}_${i}_1_value`;
 
-                const varName = getSocketValue(newNode, nameKey);
-                if (varName) {
-                    const rawValue = getSocketValue(newNode, valueKey);
-                    const parsedValue = !isNaN(parseFloat(rawValue)) && isFinite(rawValue) ? parseFloat(rawValue) : rawValue;
-                    variables[varName] = parsedValue;
-                }
+            const varName = getSocketValue(n, nameKey);
+            if (varName) {
+              const rawValue = getSocketValue(n, valueKey);
+              const parsedValue = !isNaN(parseFloat(rawValue)) && isFinite(rawValue) ? parseFloat(rawValue) : rawValue;
+              variables[varName] = parsedValue;
             }
+          }
         }
-        
+
         let resultString = '';
         try {
-            const varNames = Object.keys(variables);
-            const varValues = Object.values(variables);
-            const evaluator = new Function(...varNames, `return ${code}`);
-            const result = evaluator(...varValues);
-            resultString = String(result ?? '');
+          const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
+          const varNames = Object.keys(variables);
+          const varValues = Object.values(variables);
+          const evaluator = new AsyncFunction(...varNames, `return ${code}`);
+          const result = await evaluator(...varValues);
+          resultString = String(result ?? '');
         } catch (e) {
-            resultString = `/* Error: ${(e as Error).message.replace(/\s/g, ' ')} */`;
-        }
-
-        if (newNode.values[resultKey] !== resultString) {
-            newNode.values[resultKey] = resultString;
-            needsUpdate = true;
+          resultString = `/* Error: ${(e as Error).message.replace(/\s/g, ' ')} */`;
         }
         
-        return newNode;
-    });
+        if (n.values[resultKey] !== resultString) {
+          if (!updatedValues[n.id]) updatedValues[n.id] = {};
+          updatedValues[n.id][resultKey] = resultString;
+          needsUpdate = true;
+        }
+      });
 
-    if (needsUpdate) {
-        setGraph(g => ({ ...g, nodes: newNodes }));
-    }
+      await Promise.all(evaluationPromises);
+
+      if (needsUpdate) {
+        setGraph(g => ({
+          ...g,
+          nodes: g.nodes.map(n => {
+            if (updatedValues[n.id]) {
+              return { ...n, values: { ...n.values, ...updatedValues[n.id] } };
+            }
+            return n;
+          }),
+        }));
+      }
+    };
+
+    evaluateNodes();
   }, [graph, loading]);
 
   const handleDragStart = (e: React.DragEvent, type: string) => {

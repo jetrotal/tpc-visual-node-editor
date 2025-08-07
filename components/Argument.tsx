@@ -118,7 +118,7 @@ export function ArgumentRenderer(props: ArgumentRendererProps) {
 
             return (
                  <div className="argument-primitive">
-                    {inputSocketDef && <SocketHandle key={`${inputSocketDef.id}-in`} socket={inputSocketDef} className="abs-center-y" />}
+                    {inputSocketDef && <SocketHandle key={inputSocketDef.id} socket={inputSocketDef} />}
                     <span className="argument-primitive-label">{arg.label || arg.name || arg.originalType || arg.type}</span>
                     <div className="argument-primitive-input-wrapper">
                         {arg.prefix && (
@@ -132,7 +132,7 @@ export function ArgumentRenderer(props: ArgumentRendererProps) {
                             renderManagedInput()
                         )}
                     </div>
-                    {outputSocketDef && <SocketHandle key={`${outputSocketDef.id}-out`} socket={outputSocketDef} className="abs-center-y" />}
+                    {outputSocketDef && <SocketHandle key={outputSocketDef.id} socket={outputSocketDef} />}
                 </div>
             );
         },
@@ -172,7 +172,7 @@ export function ArgumentRenderer(props: ArgumentRendererProps) {
         },
         onBlock: ({}, childResults) => (
              <div className="argument-block">
-                {childResults}
+                {childResults.map((child, i) => <div className="argument-row" key={i}>{child}</div>)}
             </div>
         ),
         onExecBlock: ({ key }) => {
@@ -183,13 +183,13 @@ export function ArgumentRenderer(props: ArgumentRendererProps) {
             return (
                 <div className="argument-exec-block">
                     <div className="handle-wrapper">
-                        <SocketHandle socket={inputSocketDef} className="abs-center-y" />
+                        <SocketHandle socket={inputSocketDef} />
                         <span className="label in">in</span>
                     </div>
                     <div className="divider" />
                     <div className="handle-wrapper">
                         <span className="label out">out</span>
-                        <SocketHandle socket={outputSocketDef} className="abs-center-y" />
+                        <SocketHandle socket={outputSocketDef} />
                     </div>
                 </div>
             );
@@ -202,7 +202,9 @@ export function ArgumentRenderer(props: ArgumentRendererProps) {
                     {arg.array_parameter && childResults[0]}
                 </div>
                 {/* Render other arguments */}
-                {arg.array_parameter ? childResults.slice(1) : childResults}
+                {(arg.array_parameter ? childResults.slice(1) : childResults).map((child, i) => (
+                    <div className="argument-row" key={i}>{child}</div>
+                ))}
             </div>
         ),
         onGroup: (_, childResults) => <>{childResults}</>,
