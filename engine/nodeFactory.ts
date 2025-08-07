@@ -5,8 +5,7 @@
 import { NodeInstance, SocketDef, Position } from '@/types';
 import { argumentWalker, WalkerHandlers } from './argumentWalker';
 
-let nextId = 0;
-const getUniqueId = (prefix: string = 'id') => `${prefix}-${nextId++}`;
+export const getUniqueId = (prefix: string = 'id') => `${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).substr(2, 5)}`;
 
 export const getIdentifier = (item: any): string => {
     if (item.type === 'group' && Array.isArray(item.content) && item.content.length > 0) {

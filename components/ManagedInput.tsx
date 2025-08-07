@@ -25,12 +25,40 @@ export const ManagedInput: React.FC<ManagedInputProps> = ({
 }) => {
   const [value, setValue] = useState(initialValue);
   const inputRef = useRef<HTMLInputElement & HTMLTextAreaElement>(null);
-  
-  // This ref helps us know if a commit is happening because of a blur event
+  const measureRef = useRef<HTMLSpanElement>(null);
   const isBlurring = useRef(false);
-  // This ref stores the latest onCommit function to avoid dependency issues in useEffect
   const onCommitRef = useRef(onCommit);
   onCommitRef.current = onCommit;
+
+  // Effect for auto-resizing
+  useEffect(() => {
+    if (inputRef.current && measureRef.current) {
+      // Determine content for width measurement
+      let contentForWidth = String(value);
+      if (type === 'textarea') {
+        const lines = String(value).split('\n');
+        contentForWidth = lines.reduce((longest, current) => (current.length > longest.length ? current : longest), '');
+      }
+
+      // Use placeholder if value is empty for a minimum width
+      if (!contentForWidth && placeholder) {
+        contentForWidth = placeholder;
+      }
+      
+      measureRef.current.textContent = contentForWidth || ' '; // Use a space to prevent collapse to 0
+
+      // Horizontal resize
+      const newWidth = measureRef.current.offsetWidth + (type === 'textarea' ? 0 : 2);
+      inputRef.current.style.width = `${newWidth}px`;
+
+      // Vertical resize for textarea
+      if (type === 'textarea') {
+        inputRef.current.style.height = 'auto'; // Reset height
+        inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
+      }
+    }
+  }, [value, placeholder, type]);
+
 
   // Sync with external changes if the input is not focused
   useEffect(() => {
@@ -85,14 +113,10 @@ export const ManagedInput: React.FC<ManagedInputProps> = ({
 
   const handleTextareaInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     handleChange(e);
-    // Auto-resize
-    const target = e.target;
-    target.style.height = 'auto';
-    target.style.height = `${target.scrollHeight}px`;
   };
 
   const onTextareaFocus = (e: React.FocusEvent<HTMLTextAreaElement>) => {
-    // Auto-resize on focus
+    // Height is handled by the main effect, but let's ensure it's correct on focus.
     const target = e.target;
     target.style.height = 'auto';
     target.style.height = `${target.scrollHeight}px`;
@@ -106,24 +130,30 @@ export const ManagedInput: React.FC<ManagedInputProps> = ({
     onKeyDown: handleKeyDown,
     placeholder,
     className,
+    style: {
+      minWidth: '100%',
+    },
   };
 
-  if (type === 'textarea') {
-    return (
-      <textarea
-        rows={1}
-        {...commonProps}
-        onChange={handleTextareaInput}
-        onFocus={onTextareaFocus}
-      />
-    );
-  }
+  const measureSpanClassName = `${className} measure-span ${type === 'textarea' ? 'measure-span-textarea' : ''}`;
 
   return (
-    <input
-      type={type}
-      {...commonProps}
-      onChange={handleChange}
-    />
+    <div style={{ position: 'relative', display: 'block', width: '100%' }}>
+      <span ref={measureRef} className={measureSpanClassName} />
+      {type === 'textarea' ? (
+        <textarea
+          rows={1}
+          {...commonProps}
+          onChange={handleTextareaInput}
+          onFocus={onTextareaFocus}
+        />
+      ) : (
+        <input
+          type={type}
+          {...commonProps}
+          onChange={handleChange}
+        />
+      )}
+    </div>
   );
 };

@@ -1,5 +1,5 @@
 {
-  "name": "TPC Visual Node Editor new",
+  "name": "TPC Visual Node Editor TEST",
   "description": "A visual, node-based editor for the TPC scripting language that dynamically generates nodes and code from JSON definitions.",
   "requestFramePermissions": [],
   "prompt": ""

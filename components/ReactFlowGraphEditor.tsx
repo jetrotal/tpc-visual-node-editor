@@ -68,6 +68,8 @@ const ReactFlowComponent = ({
   const { fitView } = useReactFlow();
   const prevNodeCountRef = useRef(graph.nodes.length);
   const zIndexCounter = useRef(1);
+  const graphRef = useRef(graph);
+  graphRef.current = graph;
 
   // Handle z-index on edge selection
   const onEdgesChange: OnEdgesChange = useCallback(
@@ -215,20 +217,17 @@ const ReactFlowComponent = ({
 
   // Sync ReactFlow changes back to our custom graph format
   useEffect(() => {
-    if (nodes.length === 0 || isDragging) return; // Avoid processing during drag and empty state
-    
-    const updatedNodes = nodes.map((node) => {
-      const originalNode = graph.nodes.find((n) => n.id === node.id);
-      if (originalNode) {
-        return {
-          ...originalNode,
-          position: node.position,
-        };
-      }
-      return originalNode!;
-    }).filter(Boolean);
+    const currentGraph = graphRef.current;
+    // isDragging check prevents updates while user is moving a node
+    if (isDragging) return;
 
-    const updatedConnections = edges.map((edge) => ({
+    // Reconstruct the graph state from the React Flow state, which is the source of truth
+    const updatedNodes: NodeInstance[] = nodes.map((rfNode) => ({
+      ...rfNode.data.nodeData,
+      position: rfNode.position, // Always use the position from the React Flow node
+    }));
+    
+    const updatedConnections: CustomConnection[] = edges.map((edge) => ({
       id: edge.id,
       fromNode: edge.source,
       toNode: edge.target,
@@ -236,19 +235,24 @@ const ReactFlowComponent = ({
       toSocket: `${edge.target}-${edge.targetHandle?.replace(/_in$/, '').replace(/^main_/, '') || ''}`,
     }));
 
-    // Only update if there are actual changes to prevent infinite loops
-    const hasNodeChanges = updatedNodes.length === graph.nodes.length && 
-      updatedNodes.some((node, i) => {
-        const originalNode = graph.nodes.find(n => n.id === node.id);
+    // Check for meaningful changes to prevent infinite loops by comparing the new
+    // derived state with the existing state in the `graph` prop.
+    const hasNodeChanges =
+      updatedNodes.length !== currentGraph.nodes.length ||
+      updatedNodes.some((node) => {
+        const originalNode = currentGraph.nodes.find((n) => n.id === node.id);
+        // A change is detected if the node is new or its position has changed
         return !originalNode || 
-               Math.abs(node.position.x - originalNode.position.x) > 0.1 || 
+               Math.abs(node.position.x - originalNode.position.x) > 0.1 ||
                Math.abs(node.position.y - originalNode.position.y) > 0.1;
       });
 
-    const hasConnectionChanges = updatedConnections.length !== graph.connections.length ||
-      updatedConnections.some((conn, i) => {
-        const originalConn = graph.connections.find(c => c.id === conn.id);
-        return !originalConn || 
+    const hasConnectionChanges =
+      updatedConnections.length !== currentGraph.connections.length ||
+      updatedConnections.some((conn) => {
+        const originalConn = currentGraph.connections.find((c) => c.id === conn.id);
+        // A change is detected if the connection is new or its endpoints have changed
+        return !originalConn ||
                conn.fromSocket !== originalConn.fromSocket ||
                conn.toSocket !== originalConn.toSocket;
       });
@@ -259,7 +263,7 @@ const ReactFlowComponent = ({
         connections: updatedConnections,
       });
     }
-  }, [nodes, edges, graph.nodes, graph.connections, setGraph, isDragging]);
+  }, [nodes, edges, setGraph, isDragging]);
 
   // Handle new connections
   const onConnect: OnConnect = useCallback(
